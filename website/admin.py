@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import EmailMessage
+
+
+class EmailMessageAdmin(admin.ModelAdmin):
+    list_display = ('email', 'subject')
+
+
+admin.site.register(EmailMessage, EmailMessageAdmin)
