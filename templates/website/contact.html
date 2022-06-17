@@ -3,5 +3,9 @@
 <title>{% block title %}Contact | {{ block.super }}{% endblock %}</title>
 
 {% block content %}
-    <h1>Contact</h1>
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Send</button>
+    </form>
 {% endblock %}

@@ -3,5 +3,38 @@
 <title>{% block title %}Home | {{ block.super }}{% endblock %}</title>
 
 {% block content %}
-    <h1>Homepage!</h1>
+    <div class="container">
+    <div class="p-5 mb-4 bg-light rounded-3">
+      <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Welcome to my website</h1>
+        <p class="col-md-10 fs-4">MyWebsite demonstrates use of Django and Bootstrap in developing interactive websites like this one rapidly and leveraging on a model-view-template design pattern. This
+        website contains various pages, each having a unique design and approach in unpacking the functionalities and richness of Bootstrap and Django.
+        </p>
+        <button class="btn btn-primary btn-lg" type="button">Sign Up</button>
+      </div>
+    </div>
+
+    <div class="row align-items-md-stretch">
+      <div class="col-md-6">
+        <div class="h-100 p-5 text-white bg-dark rounded-3">
+          <h2>Bootstrap</h2>
+          <p>Bootstrap is a widely used Cascading Style Sheet (CSS) Framework for developing responsive and mobile-first websites.  It is a free and open-source web
+              development framework designed to ease the web development process of websites focusing on responsiveness and mobile-interactivity, and it also comes
+              with a collection of syntax for various template designs.
+          </p>
+          <a href="https://getbootstrap.com/docs" target="_blank" class="btn btn-outline-light">Bootstrap Docs</a>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="h-100 p-5 bg-light border rounded-3">
+          <h2>Django</h2>
+          <p>A widely used Python web framework in developing websites from scratch and rapidly and comes shipped with several functionalities. Django has a
+              rich Object Relational Model (ORM) functionality that favors rapid development via objects attributes to respective table fields and an Model Template
+              View (MTV) architecture just to mention a few. It also has a great, active development community.
+          </p>
+            <a href="https://docs.djangoproject.com/" target="_blank" class="btn btn-outline-secondary" role="button">Django Docs</a>
+        </div>
+      </div>
+    </div>
+    </div>
 {% endblock %}
