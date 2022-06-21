@@ -5,5 +5,5 @@ from .models import EmailMessage
 
 @admin.register(EmailMessage)
 class EmailMessageAdmin(admin.ModelAdmin):
-    list_display = ('email', 'subject',)
+    list_display = ('name', 'email',)
 

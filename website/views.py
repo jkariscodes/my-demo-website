@@ -28,13 +28,16 @@ class ContactPageView(FormView):
     success_url = '/'
 
     def form_valid(self, form):
+        name = form.cleaned_data['name']
         email = form.cleaned_data['from_email']
         subj = form.cleaned_data['subject']
         msg = form.cleaned_data['message']
 
         try:
             send_mail(subj, msg, email, ['jkariukidev@email.com'])
-            message = EmailMessage(email=email, subject=subj, message=msg)
+            message = EmailMessage(
+                name=name, email=email, subject=subj, message=msg
+            )
             message.save()
         except BadHeaderError:
             return HttpResponse('Bad header found')
