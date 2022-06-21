@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Third party
+    'crispy_forms',
+    'crispy_bootstrap5',
+
     # Local
     'website.apps.WebsiteConfig',
     'users.apps.UsersConfig',
@@ -134,5 +138,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.CustomUser'
 
 # Email
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'contact@josephkariuki.com'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Crispy configs
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+

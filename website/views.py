@@ -1,8 +1,9 @@
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
-
-from .forms import ContactForm
 from .models import EmailMessage
+from .forms import ContactForm
 
 
 class HomePageView(TemplateView):
@@ -28,11 +29,14 @@ class ContactPageView(FormView):
 
     def form_valid(self, form):
         email = form.cleaned_data['from_email']
-        subject = form.cleaned_data['subject']
-        message = form.cleaned_data['message']
+        subj = form.cleaned_data['subject']
+        msg = form.cleaned_data['message']
 
-        message = EmailMessage(email=email, subject=subject, message=message)
-        message.save()
+        try:
+            send_mail(subj, msg, email, ['jkariukidev@email.com'])
+            message = EmailMessage(email=email, subject=subj, message=msg)
+            message.save()
+        except BadHeaderError:
+            return HttpResponse('Bad header found')
         return super().form_valid(form)
-
 
