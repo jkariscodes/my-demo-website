@@ -1,8 +1,8 @@
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import FormView
-from .models import EmailMessage
+from .models import EmailMessage, BlogPost
 from .forms import ContactForm
 
 
@@ -14,12 +14,16 @@ class AboutPageView(TemplateView):
     template_name = 'website/about.html'
 
 
-class BlogPageView(TemplateView):
-    template_name = 'website/blog.html'
+class BlogListView(ListView):
+    model = BlogPost
+    context_object_name = 'blog_posts'
+    template_name = 'website/blog_posts.html'
 
 
-# class BlogArticlePageView(TemplateView):
-#     template_name = 'website/home.html'
+class BlogDetailView(DetailView):
+    model = BlogPost
+    context_object_name = 'blog_article'
+    template_name = 'website/blog_article.html'
 
 
 class ContactPageView(FormView):

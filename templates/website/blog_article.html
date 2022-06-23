@@ -1,0 +1,30 @@
+{% extends '_base.html' %}
+
+<title>{% block title %}{{ blog_article.title }} | {{ block.super }}{% endblock %}</title>
+
+{% block content %}
+    <div class="container">
+    <h1>{{ blog_article.title }}</h1>
+    <hr>
+    <small>Post by: {{ blog_article.author }} on {{ blog_article.published.date }}</small><br/>
+    <br>
+    <br>
+    <div class="card mb-3">
+        <div class="row no-gutters">
+            <div class="col-md-8">
+                <div class="card-body">
+                    <p class="card-text">
+                        {% autoescape off %}
+                            {{ blog_article.body }}
+                        {% endautoescape %}
+                    </p>
+                    <p class="card-text">{{ post.author.profile.bio }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+     <a href="{% url 'blog_posts' %}" class="btn btn-secondary">Back</a>
+    <br>
+    </div>
+{% endblock %}

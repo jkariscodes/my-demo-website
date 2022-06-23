@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'allauth',
     'allauth.account',
+    'ckeditor',
 
     # Local
     'website.apps.WebsiteConfig',

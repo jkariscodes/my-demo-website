@@ -6,6 +6,9 @@
     <div class="container">
     <div class="p-5 mb-4 bg-light rounded-3">
       <div class="container-fluid py-5">
+      {% if user.is_authenticated %}
+          <h1 class="text-primary display-5 fw-bold">Hi {{ user.username|capfirst }}</h1>
+      {% endif %}
         <h1 class="display-5 fw-bold">Welcome to my website</h1>
         <p class="col-md-10 fs-4">MyWebsite demonstrates use of Django and Bootstrap in developing interactive websites like this one rapidly and leveraging on a model-view-template design pattern. This
         website contains various pages, each having a unique design and approach in unpacking the functionalities and richness of Bootstrap and Django.

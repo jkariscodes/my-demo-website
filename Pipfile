@@ -4,10 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
+django = "==4.0.5"
 psycopg2-binary = "==2.9.3"
 crispy-bootstrap5 = "==0.6"
 django-allauth = "==0.51.0"
+django-ckeditor = "==6.4.2"
+pip = "==22.1.2"
 
 [dev-packages]
 
