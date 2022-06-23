@@ -36,11 +36,14 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
 
     # Third party
     'crispy_forms',
     'crispy_bootstrap5',
+    'allauth',
+    'allauth.account',
 
     # Local
     'website.apps.WebsiteConfig',
@@ -74,6 +77,11 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 WSGI_APPLICATION = 'mywebsite.wsgi.application'
@@ -140,6 +148,18 @@ AUTH_USER_MODEL = 'users.CustomUser'
 # Email
 DEFAULT_FROM_EMAIL = 'contact@josephkariuki.com'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Allauth configs
+LOGIN_REDIRECT = '/'
+ACCOUNT_LOGOUT_REDIRECT = '/'
+LOGIN_REDIRECT_URL = '/'
+ACCOUNT_SESSION_REMEMBER = True
+# ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+SITE_ID = 1
 
 # Crispy configs
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'

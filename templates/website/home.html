@@ -10,7 +10,9 @@
         <p class="col-md-10 fs-4">MyWebsite demonstrates use of Django and Bootstrap in developing interactive websites like this one rapidly and leveraging on a model-view-template design pattern. This
         website contains various pages, each having a unique design and approach in unpacking the functionalities and richness of Bootstrap and Django.
         </p>
-        <button class="btn btn-primary btn-lg" type="button">Sign Up</button>
+          {% if not user.is_authenticated %}
+              <a class="btn btn-primary btn-lg" type="button" href="{% url 'account_signup' %}">Sign Up</a>
+          {% endif %}
       </div>
     </div>
 

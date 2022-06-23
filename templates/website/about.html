@@ -11,10 +11,12 @@
           MyWebsite aims at demonstrating the functionality of Bootstrap in web development, specifically focussing on the ease that comes with implementing
           responsive and mobile-first extensive prebuilt components, and powerful JavaScript plugins.
       </p>
+        {% if not user.is_authenticated %}
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Sign In</button>
-        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Sign Up</button>
+          <a type="button" class="btn btn-primary btn-lg px-4 gap-3" href="{% url 'account_login' %}">Log In</a>
+          <a type="button" class="btn btn-outline-secondary btn-lg px-4" href="{% url 'account_signup' %}">Sign Up</a>
       </div>
+        {% endif %}
     </div>
   </div>
   <div class="bg-dark text-secondary px-4 py-5 text-center">

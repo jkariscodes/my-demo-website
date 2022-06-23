@@ -35,9 +35,12 @@
                             Account
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Log In</a></li>
-                            <li><a class="dropdown-item" href="#">Sign Up</a></li>
-{#                            <li><a class="dropdown-item" href="#">Something else here</a></li>#}
+                            {% if user.is_authenticated %}
+                                <li><a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a></li>
+                            {% else %}
+                                <li><a class="dropdown-item" href="{% url 'account_login' %}">Log In</a></li>
+                                <li><a class="dropdown-item" href="{% url 'account_signup' %}">Sign Up</a></li>
+                            {% endif %}
                         </ul>
                     </li>
                 </ul>
