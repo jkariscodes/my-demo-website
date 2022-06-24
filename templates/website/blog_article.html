@@ -25,6 +25,10 @@
     </div>
     <br>
      <a href="{% url 'blog_posts' %}" class="btn btn-secondary">Back</a>
+    {% if user.is_authenticated %}
+        <a href="#" class="btn btn-primary">edit</a>
+        <a href="#" class="btn btn-danger">delete</a>
+    {% endif %}
     <br>
     </div>
 {% endblock %}
