@@ -4,19 +4,27 @@
 
 {% block content %}
     <div class="container">
-    <h1>Blog</h1>
-    {% for post in blog_posts %}
-        <div class="col-md-12">
-            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                <div class="col p-4 d-flex flex-column position-static">
-                    <h3 class="mb-0">{{ post.title }}</h3>
-                    <div class="mb-1 text-muted">{{ post.published.date }}</div>
-                        {% autoescape off %}
-                            <p class="card-text mb-auto">{{ post.body|truncatechars:100 }}.</p>
-                        {% endautoescape %}
-                        <a href="{% url 'blog_article' post.pk %}" class="stretched-link">Continue reading</a>
-                </div>
-        </div>
-    {% endfor %}
+        <h1>Blog</h1>
+        {% if blog_posts.count == 0 %}
+            <p>Sorry, there are no blog posts to show here.
+                {% if not user.is_authenticated %}
+                    Please <a href="{% url 'account_login' %}">login</a> or <a href="{% url 'account_signup' %}">sign up</a> to post.
+                {% endif %}
+            </p>
+        {% else %}
+            {% for post in blog_posts %}
+                <div class="col-md-12">
+                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <h3 class="mb-0">{{ post.title }}</h3>
+                            <div class="mb-1 text-muted">{{ post.published.date }}</div>
+                                {% autoescape off %}
+                                    <p class="card-text mb-auto">{{ post.body|truncatechars:100 }}.</p>
+                                {% endautoescape %}
+                                <a href="{% url 'blog_article' post.pk %}" class="stretched-link">Continue reading</a>
+                            </div>
+                        </div>
+            {% endfor %}
+        {% endif %}
     </div>
 {% endblock %}

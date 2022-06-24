@@ -43,7 +43,7 @@ class BlogPost(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE
     )
     # header_image = models.ImageField(
-    #     null=True, blank=False, upload_to='images'
+    #     null=True, blank=False, upload_to='headers'
     # )
     body = RichTextField(blank=False, null=True)
     published = models.DateTimeField(default=timezone.now)
@@ -67,5 +67,5 @@ class BlogPost(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blog_posts', args=[str(self.id)])
+        return reverse('blog_article', args=[str(self.id)])
 

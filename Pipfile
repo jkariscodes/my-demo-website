@@ -10,6 +10,7 @@ crispy-bootstrap5 = "==0.6"
 django-allauth = "==0.51.0"
 django-ckeditor = "==6.4.2"
 pip = "==22.1.2"
+whitenoise = "==6.2.0"
 
 [dev-packages]
 
