@@ -37,7 +37,7 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
     model = BlogPost
     context_object_name = 'blog_article_create'
     template_name = 'website/blog_article_create.html'
-    fields = ['title', 'body', 'category', 'status']
+    fields = ['title', 'header_image', 'body', 'category', 'status']
     success_url = reverse_lazy('blog_posts')
 
     def form_valid(self, form):
@@ -49,7 +49,7 @@ class BlogUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = BlogPost
     context_object_name = 'blog_article_update'
     template_name = 'website/blog_article_update.html'
-    fields = ['title', 'body', 'category', 'status']
+    fields = ['title', 'header_image', 'body', 'category', 'status']
     success_url = reverse_lazy('blog_posts')
 
     def form_valid(self, form):

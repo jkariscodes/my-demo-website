@@ -42,9 +42,9 @@ class BlogPost(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE
     )
-    # header_image = models.ImageField(
-    #     null=True, blank=False, upload_to='headers'
-    # )
+    header_image = models.ImageField(
+        null=True, blank=False, upload_to='headers'
+    )
     body = RichTextField(blank=False, null=True)
     published = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)

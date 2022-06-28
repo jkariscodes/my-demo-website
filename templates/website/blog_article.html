@@ -5,11 +5,13 @@
 {% block content %}
     <div class="container">
             <h1>{{ blog_article.title }}</h1>
-            {#    <hr>#}
-            {#    <p>#}
-            {#        <img src="{{ post.header_image.url }}" class="img-thumbnail">#}
-            {#        {{ post.body|safe }}#}
-            {#    </p>#}
+                <hr>
+                <p>
+                    {% if  blog_article.header_image %}
+                        <img src="{{ blog_article.header_image.url }}" class="img-thumbnail">
+                    {% endif %}
+                    {{ post.body|safe }}
+                </p>
             <hr>
             <small>Post by: {{ blog_article.author }} on {{ blog_article.published.date }}</small><br/>
             <br>
