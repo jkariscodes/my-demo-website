@@ -7,6 +7,9 @@ from ckeditor.fields import RichTextField
 
 
 class EmailMessage(models.Model):
+    """
+    Email contact message model.
+    """
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=254)
     subject = models.CharField(max_length=128)
@@ -17,7 +20,12 @@ class EmailMessage(models.Model):
 
 
 class BlogCategory(models.Model):
-    created = models.DateTimeField(auto_now_add=True, verbose_name='Created at')
+    """
+    Blog post category model.
+    """
+    created = models.DateTimeField(
+        auto_now_add=True, verbose_name='Created at'
+    )
     updated = models.DateTimeField(auto_now=True, verbose_name='Created at')
     title = models.CharField(max_length=100, verbose_name='Title')
 
@@ -31,6 +39,9 @@ class BlogCategory(models.Model):
 
 
 class BlogPost(models.Model):
+    """
+    Blog post model.
+    """
     id = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False
     )

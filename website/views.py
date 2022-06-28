@@ -14,26 +14,42 @@ from .forms import ContactForm
 
 
 class HomePageView(TemplateView):
+    """
+    Landing page view.
+    """
     template_name = 'website/home.html'
 
 
 class AboutPageView(TemplateView):
+    """
+    About page template view.
+    """
     template_name = 'website/about.html'
 
 
 class BlogListView(ListView):
+    """
+    Blog posts/articles view.
+    """
     model = BlogPost
     context_object_name = 'blog_posts'
     template_name = 'website/blog_posts.html'
+    paginate_by = 4
 
 
 class BlogDetailView(DetailView):
+    """
+    Single blog post/article view.
+    """
     model = BlogPost
     context_object_name = 'blog_article'
     template_name = 'website/blog_article.html'
 
 
 class BlogCreateView(LoginRequiredMixin, CreateView):
+    """
+    Create blog post/article view.
+    """
     model = BlogPost
     context_object_name = 'blog_article_create'
     template_name = 'website/blog_article_create.html'
@@ -46,6 +62,9 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
 
 
 class BlogUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    """
+    Blog post edit/update view.
+    """
     model = BlogPost
     context_object_name = 'blog_article_update'
     template_name = 'website/blog_article_update.html'
@@ -58,10 +77,13 @@ class BlogUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         my_obj = self.get_object()
-        return my_obj.author == self.request
+        return my_obj.author == self.request.user
 
 
 class BlogDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    """
+    Blog post delete confirm view.
+    """
     model = BlogPost
     context_object_name = 'blog_article_delete'
     template_name = 'website/blog_article_delete.html'
@@ -69,10 +91,13 @@ class BlogDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         my_obj = self.get_object()
-        return my_obj.author == self.request
+        return my_obj.author == self.request.user
 
 
 class ContactPageView(FormView):
+    """
+    Email contact form view.
+    """
     template_name = 'website/contact.html'
     form_class = ContactForm
     success_url = '/'
