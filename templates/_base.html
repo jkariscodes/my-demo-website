@@ -13,12 +13,15 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'home' %}">MyWebsite</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'img/mywebsite.png' %}" alt="" width="36" height="36">MyWebsite
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
                     </li>
@@ -26,11 +29,14 @@
                         <a class="nav-link" href="{% url 'about' %}">About</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
                             Blog
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="{% url 'blog_posts' %}">Articles</a></li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'blog_posts' %}">Articles</a>
+                            </li>
                             {% if user.is_authenticated %}
                                 <li><a class="dropdown-item" href="{% url 'blog_article_create' %}">Create New Article</a></li>
                             {% endif %}
@@ -63,9 +69,11 @@
 </header>
     {% block content %}
     {% endblock %}
-<footer class="container pt-3 mt-4 text-muted border-top">
-    <span class="align-middle">Developed by <a href="https://josephkariuki.com">Joseph Kariuki</a> &copy; 2022</span>
+    <footer class="container pt-3 mt-4 text-muted border-top">
+        <span class="align-middle">Developed by <a href="https://josephkariuki.com">Joseph Kariuki</a> &copy; 2022</span>
     </footer>
-<script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

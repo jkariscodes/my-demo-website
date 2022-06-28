@@ -4,12 +4,9 @@
 
 {% block content %}
     <div class="container">
-        <h1>Blog</h1>
+        <h1>Blog Search</h1>
         {% if blog_search_list.count == 0 %}
             <p>Sorry, there are no blog posts to show here.
-                {% if not user.is_authenticated %}
-                    Please <a href="{% url 'account_login' %}">login</a> or <a href="{% url 'account_signup' %}">sign up</a> to post.
-                {% endif %}
             </p>
         {% else %}
             {% for post in blog_search_list %}

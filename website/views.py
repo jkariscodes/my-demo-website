@@ -1,7 +1,6 @@
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse
+from django.core.mail import send_mail
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import (
     FormView,
@@ -101,29 +100,34 @@ class ContactPageView(FormView):
     """
     template_name = 'website/contact.html'
     form_class = ContactForm
-    success_url = '/'
+    success_url = '/contact/success/'
 
     def form_valid(self, form):
-        name = form.cleaned_data['name']
-        email = form.cleaned_data['from_email']
-        subj = form.cleaned_data['subject']
-        msg = form.cleaned_data['message']
-
-        try:
-            send_mail(subj, msg, email, ['jkariukidev@email.com'])
-            message = EmailMessage(
-                name=name, email=email, subject=subj, message=msg
-            )
-            message.save()
-        except BadHeaderError:
-            return HttpResponse('Bad header found')
+        name = form.cleaned_data.get('name')
+        from_email = form.cleaned_data.get('from_email')
+        subj = form.cleaned_data.get('subject')
+        msg = form.cleaned_data.get('message')
+        send_mail(subj, msg, from_email, ['jkariukidev@email.com'])
+        form.save()
+        form = ContactForm
         return super().form_valid(form)
 
 
+class EmailSuccess(TemplateView):
+    """
+    Email success template view.
+    """
+    template_name = 'website/email_success.html'
+
+
 class BlogSearchView(ListView):
+    """
+    Blog posts search list view.
+    """
     model = BlogPost
     context_object_name = 'blog_search_list'
     template_name = 'website/blog_posts_search.html'
+    paginate_by = 10
 
     def get_queryset(self):
         query = self.request.GET.get('q')

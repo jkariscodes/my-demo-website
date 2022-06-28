@@ -1,0 +1,24 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+<title>{% block title %}Email Success | {{ block.super }}{% endblock %}</title>
+
+{% block content %}
+    <div class="modal fade emailSentModal" id="staticBackdrop" data-bs-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Contact Form</h5>
+                </div>
+                <div class="modal-body">
+                    Your e-mail has been sent successfully.
+                </div>
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-secondary" href="{% url 'contact' %}">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
