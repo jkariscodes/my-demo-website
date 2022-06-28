@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
@@ -117,4 +118,17 @@ class ContactPageView(FormView):
         except BadHeaderError:
             return HttpResponse('Bad header found')
         return super().form_valid(form)
+
+
+class BlogSearchView(ListView):
+    model = BlogPost
+    context_object_name = 'blog_search_list'
+    template_name = 'website/blog_posts_search.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        return BlogPost.objects.filter(
+            Q(title__icontains=query) | Q(category__title__icontains=query)
+        )
+
 
