@@ -5,7 +5,7 @@ services:
   database:
     image: postgres:14.3
     env_file:
-      - .env
+      - .env_prod
     volumes:
       - postgres_data:/var/lib/postgresql/data/
   web:
@@ -16,7 +16,7 @@ services:
     ports:
       - 80:8000
     env_file:
-      - .env
+      - .env_prod
     depends_on:
       - database
 
