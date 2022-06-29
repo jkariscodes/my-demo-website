@@ -61,7 +61,12 @@ instructions.
      ```
      docker compose up -d 
      ```
-  7. To check the logs you can make use of ``docker compose logs`` or ``docker compose logs -f`` to continue watching the log file and its print out.
+  7. Propagate models into your database schema using the [migrate command](https://docs.djangoproject.com/en/4.0/ref/django-admin/#migrate). Note
+     that this command is being run inside the docker web container. Refer for more on [exec docker command](https://docs.docker.com/engine/reference/commandline/compose_exec/).
+     ```
+     docker compose exec web python manage.py migrate
+     ```
+  8. To check the logs you can make use of ``docker compose logs`` or ``docker compose logs -f`` to continue watching the log file and its print out.
 
   ## Usage
 

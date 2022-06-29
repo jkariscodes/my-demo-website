@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG')
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
@@ -165,8 +165,10 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 # Deployment
-# SECURE_HSTS_SECONDS = os.environ.get('SECURE_HSTS_SECONDS')
-# SESSION_COOKIE_SECURE = int(os.environ.get('SESSION_COOKIE_SECURE'))
-# CSRF_COOKIE_SECURE = int(os.environ.get('CSRF_COOKIE_SECURE'))
-# SECURE_SSL_REDIRECT = int(os.environ.get('SECURE_SSL_REDIRECT'))
+# SECURE_HSTS_SECONDS = 3600
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_PRELOAD = True
 
