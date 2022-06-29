@@ -9,7 +9,7 @@ from website.sitemaps import BlogPostSitemap
 sitemaps = {'blogposts': BlogPostSitemap}
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('tajiri/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('', include('website.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},

@@ -5,9 +5,9 @@ services:
   database:
     image: postgres:14.3
     env_file:
-      - .env
+      - .env_dev
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - postgres_data_dev:/var/lib/postgresql/data/
     ports:
       - "5432:5432"
   web:
@@ -18,9 +18,9 @@ services:
     ports:
       - "8000:8000"
     env_file:
-      - .env
+      - .env_dev
     depends_on:
       - database
 
 volumes:
-  postgres_data:
+  postgres_data_dev:

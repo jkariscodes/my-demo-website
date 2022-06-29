@@ -55,16 +55,25 @@
                             {% if user.is_authenticated %}
                                 <li><a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a></li>
                             {% else %}
-                                <li><a class="dropdown-item" href="{% url 'account_login' %}">Log In</a></li>
-                                <li><a class="dropdown-item" href="{% url 'account_signup' %}">Sign Up</a></li>
+                                {% if user %}
+                                    <li><a class="dropdown-item" href="{% url 'account_login' %}">Log In</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'account_signup' %}">Sign Up</a></li>
+                                {% endif %}
                             {% endif %}
                         </ul>
                     </li>
                 </ul>
+                {% if blog_posts.count >= 1 %}
                 <form class="d-flex" method="get" action="{% url 'blog_posts_search' %}">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
+                {% else %}
+                    <form class="d-flex flex-nowrap" method="get" action="{% url 'blog_posts_search' %}">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q" disabled>
+                    <button class="btn btn-outline-success disabled" type="submit">Search</button>
+                </form>
+                {% endif %}
             </div>
         </div>
     </nav>

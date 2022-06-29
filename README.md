@@ -23,7 +23,7 @@ instructions.
   - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) - Most common version control system.
   - [Docker Desktop Windows](https://docs.docker.com/desktop/windows/install/) - Software for handling development operations (DevOps). Installs Docker CLI, Docker Compose etc.
   - [Docker Desktop Linux](https://docs.docker.com/desktop/linux/install/) - Installs Docker CLI, Docker Compose etc.
-  - [PostgresSQL](https://hub.docker.com/_/postgres?tab=tags) - Database leveraged in this project. Version referenced in [docker-compose.yml](docker-compose.yml)
+  - [PostgresSQL](https://hub.docker.com/_/postgres?tab=tags) - Database leveraged in this project. Version referenced in [docker-compose.yml](docker-compose-dev.yml)
   - [Python](https://www.python.org/downloads/release/python-3810/) - Core language used in this project. Version referenced in the [Dockerfile](Dockerfile)
   - [Django](https://docs.djangoproject.com/en/4.0/topics/install/) - Python web development framework for developers with deadlines. Version referenced in [Pipfile](Pipfile)
 
