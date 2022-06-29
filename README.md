@@ -12,6 +12,7 @@ in various contexts such as personal portfolio and company websites. There is an
   - [Licenses](#license)
   - [Contributing](#contributing)
   - [Tests](#tests)
+  - [Deployment](#deployment)
   - [Questions](#questions)
 
   ## Installation
@@ -22,11 +23,45 @@ instructions.
   - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) - Most common version control system.
   - [Docker Desktop Windows](https://docs.docker.com/desktop/windows/install/) - Software for handling development operations (DevOps). Installs Docker CLI, Docker Compose etc.
   - [Docker Desktop Linux](https://docs.docker.com/desktop/linux/install/) - Installs Docker CLI, Docker Compose etc.
-  - [PostgreSQL](https://hub.docker.com/_/postgres?tab=tags) - Database leveraged in this project. Version referenced in [docker-compose.yml](docker-compose.yml)
+  - [PostgresSQL](https://hub.docker.com/_/postgres?tab=tags) - Database leveraged in this project. Version referenced in [docker-compose.yml](docker-compose.yml)
   - [Python](https://www.python.org/downloads/release/python-3810/) - Core language used in this project. Version referenced in the [Dockerfile](Dockerfile)
   - [Django](https://docs.djangoproject.com/en/4.0/topics/install/) - Python web development framework for developers with deadlines. Version referenced in [Pipfile](Pipfile)
 
+### Dependencies
+  The project dependencies specific to Python include: __pipenv, django, psycopg2-binary, crispy-bootstrap5, django-allauth, django-ckeditor, pip, 
+  whitenoise, pillow__ and [Pipfile](Pipfile) lists them.
 
+### Procedure
+
+  To launch the project, follow the following steps.
+  1. Install Git, Python with Pipenv (Pip can also be used), and Docker. Take note of [Windows pre-requisites](https://docs.docker.com/desktop/windows/install/#system-requirements) 
+     and [Linux pre-requisites](https://docs.docker.com/desktop/linux/install/#system-requirements) of installing Docker priorto proceeding.
+  2. Clone this project using `git clone` command.
+      ```shell
+     git clone https://github.com/jkariukidev/my-demo-website.git
+     ```
+  3. Navigate into the cloned project folder and using a terminal/shell or otherwise, rename the [.env.sample](.env.sample) to `.env` to be recognized
+     by docker.
+  4. Edit the environment variables as you please and ensure you do not share passwords and secure keys with the public. The env variables include:
+     - ``SECRET_KEY`` - Django cryptography key leveraged in [reference](https://docs.djangoproject.com/en/4.0/ref/settings/#secret-key).
+     - ``POSTGRES_DB`` - Postgres database name. [postgresql reference](https://www.postgresql.org/docs/14/libpq-envars.html), [docker reference](https://hub.docker.com/_/postgres)
+     - ``POSTGRES_USER`` - Optional variable used together with ``POSTGRES_PASSWORD`` that sets a user and password.
+     - ``POSTGRES_PASSWORD`` - Mandatory variable used to set a superuser password. Must not be empty.
+     - ``DEBUG`` - Variable used in fixing issues in development (hence set to ``False``)environment and should never be set to ``True`` in 
+       production. [Reference](https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/#debug)
+  5. Build the required images using Docker. This command assumes you are in the current directory of project.
+     ```
+     docker compose build .
+     ```
+  6. Run the docker services for this project using compose.
+     ```
+     docker compose up
+     ```
+     OR to run in a detached mode (without seeing the logs) .ie. in the background
+     ```
+     docker compose up -d 
+     ```
+  7. To check the logs you can make use of ``docker compose logs`` or ``docker compose logs -f`` to continue watching the log file and its print out.
 
   ## Usage
 
@@ -57,15 +92,18 @@ Look for a project's contribution instructions. If there are succinct, please fo
 - If the project has tests run them!
 - Write or adapt tests as needed.
 - Add or change the documentation as needed.
-- Squash your commits into a single commit with git's [interactive rebase](https://help.github.com/articles/interactive-rebase). Create a new branch if necessary.
-- Push your branch to your fork on Github, the remote `origin`.
-- From your fork open a pull request in the correct branch. Target the project's `develop` branch if there is one, else go for `master`!
-- …
+- Squash your commits into a single commit with git's [interactive rebase](https://help.github.com/articles/interactive-rebase). 
+  Create a new branch if necessary.
+- Push your branch to your fork on GitHub, the remote `origin`.
+- From your fork open a pull request in the correct branch. Target the project's `develop` branch if there is one, else 
+  go for `master`!
+
 - If the maintainer requests further changes just push them to your branch. The PR will be updated automatically.
 - Once the pull request is approved and merged you can pull the changes from `upstream` to your local repo and delete
 your extra branch(es).
 
-And last but not least: Always write your commit messages in the present tense. Your commit message should describe what the commit, when applied, does to the code – not what you did to the code.
+And last but not least: Always write your commit messages in the present tense. Your commit message should describe what 
+the commit, when applied, does to the code – not what you did to the code.
 
   ## Tests
   Following the guidelines on testing Python projects using:
