@@ -23,7 +23,7 @@ instructions.
   - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) - Most common version control system.
   - [Docker Desktop Windows](https://docs.docker.com/desktop/windows/install/) - Software for handling development operations (DevOps). Installs Docker CLI, Docker Compose etc.
   - [Docker Desktop Linux](https://docs.docker.com/desktop/linux/install/) - Installs Docker CLI, Docker Compose etc.
-  - [PostgresSQL](https://hub.docker.com/_/postgres?tab=tags) - Database leveraged in this project. Version referenced in [docker-compose.yml](docker-compose-dev.yml)
+  - [Postgres](https://hub.docker.com/_/postgres?tab=tags) - Database leveraged in this project. Version referenced in [docker-compose.yml](docker-compose-dev.yml)
   - [Python](https://www.python.org/downloads/release/python-3810/) - Core language used in this project. Version referenced in the [Dockerfile](Dockerfile)
   - [Django](https://docs.djangoproject.com/en/4.0/topics/install/) - Python web development framework for developers with deadlines. Version referenced in [Pipfile](Pipfile)
 
@@ -49,24 +49,33 @@ instructions.
      - ``POSTGRES_PASSWORD`` - Mandatory variable used to set a superuser password. Must not be empty.
      - ``DEBUG`` - Variable used in fixing issues in development (hence set to ``False``)environment and should never be set to ``True`` in 
        production. [Reference](https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/#debug)
-  5. Build the required images using Docker. This command assumes you are in the current directory of project.
+  5. Run the docker services for this project using compose in development environment.
      ```
-     docker compose build .
-     ```
-  6. Run the docker services for this project using compose.
-     ```
-     docker compose up
+     docker compose -f docker-compose-dev.yml up
      ```
      OR to run in a detached mode (without seeing the logs) .ie. in the background
      ```
-     docker compose up -d 
+     docker compose -f docker-compose-dev.yml up -d
+     ```
+  6. Run the docker services for this project using compose in production environment.
+     ```
+     docker compose -f docker-compose-prod.yml up
+     ```
+     OR to run in a detached mode (without seeing the logs) .ie. in the background
+     ```
+     docker compose -f docker-compose-prod.yml up -d
      ```
   7. Propagate models into your database schema using the [migrate command](https://docs.djangoproject.com/en/4.0/ref/django-admin/#migrate). Note
      that this command is being run inside the docker web container. Refer for more on [exec docker command](https://docs.docker.com/engine/reference/commandline/compose_exec/).
      ```
-     docker compose exec web python manage.py migrate
+     docker compose -f docker-compose-dev.yml exec web python manage.py migrate
      ```
-  8. To check the logs you can make use of ``docker compose logs`` or ``docker compose logs -f`` to continue watching the log file and its print out.
+     similarly, in production
+     ```
+     docker compose -f docker-compose-dev.yml exec web python manage.py migrate
+     ```
+  8. To check the logs you can make use of ``docker compose -f docker-compose-dev.yml logs`` or ``docker compose -f docker-compose-dev.yml logs -f`` to continue watching the log file and its print out.
+  9. In development, access the website in (HTTP) http://localhost:8000 while in production, (HTTPS) https://localhost
 
   ## Usage
 
@@ -112,11 +121,12 @@ the commit, when applied, does to the code – not what you did to the code.
 
   ## Tests
   Following the guidelines on testing Python projects using:
+  - Implementation of Django Unittest in this [test.py](website/tests.py) file. Run the tests using ``docker compose -f docker-compose-dev.yml exec web python manage.py test``
   - [Tox](https://docs.djangoproject.com/en/4.0/internals/contributing/writing-code/unit-tests/#running-tests-using-tox)
   - [Django testing tools](https://docs.djangoproject.com/en/4.0/topics/testing/tools/)
 
   ## Deployment
-  Following the guidelines on deployment in tutorial demo:
+  Use the [production configuration](docker-compose-prod.yml) in deploying into a public server. Following the guidelines on deployment in tutorial demo:
   - [Demo](https://youtube.com/josephkariukidev)
 
   ## Questions
@@ -124,3 +134,6 @@ the commit, when applied, does to the code – not what you did to the code.
 
   - [My Socials](https://linktr.ee/josephkariuki)
   - [My Website](https://josephkariuki.com)
+  ## References
+  - [Django Documentation](https://docs.djangoproject.com/)
+  - [Learn Django](https://learndjango.com/)
