@@ -4,10 +4,8 @@ services:
 
   database:
     image: postgres:14.3
-    environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+    env_file:
+      - .env
     volumes:
       - postgres_data:/var/lib/postgresql/data/
   web:
@@ -17,10 +15,8 @@ services:
       - .:/website
     ports:
       - 80:8000
-    environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+    env_file:
+      - .env
     depends_on:
       - database
 

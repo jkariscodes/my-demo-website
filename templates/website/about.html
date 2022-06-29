@@ -1,42 +1,42 @@
 {% extends '_base.html' %}
 
+{% load static %}
+
 <title>{% block title %}About | {{ block.super }}{% endblock %}</title>
 
 {% block content %}
-    <div class="px-4 py-5 my-5 text-center">
-{#    <img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">#}
-    <h1 class="display-5 fw-bold">About MyWebsite</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">
-          MyWebsite aims at demonstrating the functionality of Bootstrap in web development, specifically focussing on the ease that comes with implementing
-          responsive and mobile-first extensive prebuilt components, and powerful JavaScript plugins.
-      </p>
-        {% if not user.is_authenticated %}
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-          <a type="button" class="btn btn-primary btn-lg px-4 gap-3" href="{% url 'account_login' %}">Log In</a>
-          <a type="button" class="btn btn-outline-secondary btn-lg px-4" href="{% url 'account_signup' %}">Sign Up</a>
-      </div>
-        {% endif %}
+    <div class="bg-about px-4 py-5 my-5 text-center">
+        <h1 class="display-5 fw-bold">About MyWebsite</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">
+                MyWebsite aims at demonstrating the functionality of Bootstrap in web development, specifically focussing on the ease that comes with implementing
+                responsive and mobile-first extensive prebuilt components, and powerful JavaScript plugins.
+            </p>
+            {% if not user.is_authenticated %}
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <a type="button" class="btn btn-outline-primary btn-lg px-4 gap-3" href="{% url 'account_login' %}">Log  In</a>
+                    <a type="button" class="btn btn-outline-secondary btn-lg px-4 gap-3" href="{% url 'account_signup' %}">Sign Up</a>
+                </div>
+            {% endif %}
+        </div>
     </div>
-  </div>
-  <div class="bg-dark text-secondary px-4 py-5 text-center">
-    <div class="py-5">
+    <div class="bg-dark text-secondary px-4 py-5 text-center">
       <h1 class="display-5 fw-bold text-white">Back End</h1>
       <div class="col-lg-6 mx-auto">
         <p class="fs-5 mb-4">MyWebsite is a Full-Stack website that leverages on Django framework as Back-End. It demonstrates the implementation of the model
             view template architecture, template tags, CRUD operations and HTTP requests and responses in a simple way.
         </p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-          <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Django Docs</button>
-{#          <button type="button" class="btn btn-outline-light btn-lg px-4">Secondary</button>#}
-        </div>
+          <a type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" href="https://docs.djangoproject.com/" target="_blank">Django Docs</a>
+        </div><br>
+          <img class="d-block mx-lg-auto img-fluid" width="600" height="250" src="{% static 'img/django-logo.png' %}" style="align-content: start" alt="Django">
       </div>
     </div>
   </div>
   <div class="container col-xxl-8 px-4 py-5">
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
       <div class="col-10 col-sm-8 col-lg-6">
-        <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+        <img src="{% static 'img/bootstrap-logo.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
       </div>
       <div class="col-lg-6">
         <h1 class="display-5 fw-bold lh-1 mb-3">Front-End</h1>
@@ -44,8 +44,7 @@
             can be extended to even more rich functionalities using third-party libraries and code.
         </p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-{#          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>#}
-          <button type="button" class="btn btn-outline-secondary btn-lg px-4">Bootstrap Docs</button>
+          <a type="button" class="btn btn-outline-secondary btn-lg px-4" href="https://getbootstrap.com/" target="_blank">Bootstrap Docs</a>
         </div>
       </div>
     </div>

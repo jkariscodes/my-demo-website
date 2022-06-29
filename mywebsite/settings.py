@@ -8,12 +8,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#1poktr2nmez!nqwq)qsjp=e06g-q=6b%2*(a2pib%m*jo0kn+'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -163,4 +163,10 @@ SITE_ID = 1
 # Crispy configs
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+# Deployment
+# SECURE_HSTS_SECONDS = os.environ.get('SECURE_HSTS_SECONDS')
+# SESSION_COOKIE_SECURE = int(os.environ.get('SESSION_COOKIE_SECURE'))
+# CSRF_COOKIE_SECURE = int(os.environ.get('CSRF_COOKIE_SECURE'))
+# SECURE_SSL_REDIRECT = int(os.environ.get('SECURE_SSL_REDIRECT'))
 
