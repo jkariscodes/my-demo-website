@@ -54,6 +54,7 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             {% if user.is_authenticated %}
                                 <li><a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a></li>
+                                <li><a class="dropdown-item" href="{% url 'account_change_password' %}">Change password</a></li>
                             {% else %}
                                 {% if user %}
                                     <li><a class="dropdown-item" href="{% url 'account_login' %}">Log In</a></li>
