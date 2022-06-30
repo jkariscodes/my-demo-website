@@ -6,6 +6,7 @@ build:
     web: Dockerfile
 release:
   image: web
-  command: python manage.py migrate
+  command:
+    - python manage.py migrate
 run:
   web: gunicorn mywebsite.wsgi
