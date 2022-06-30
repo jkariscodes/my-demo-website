@@ -1,4 +1,4 @@
-# Django Website Development Tutorial
+# My Website Project
 
   ## Description
   This is a simple website that demonstrates web development using Django and Bootstrap and one that can be replicated
@@ -40,8 +40,8 @@ instructions.
       ```shell
      git clone https://github.com/jkariukidev/my-demo-website.git
      ```
-  3. Navigate into the cloned project folder and using a terminal/shell or otherwise, rename the [.env.sample](.env.sample) to `.env` to be recognized
-     by docker.
+  3. Navigate into the cloned project folder and using a terminal/shell or otherwise, rename the [.env_dev.sample](.env_dev.sample) 
+     or [env_prod.sample](.env_prod.sample) to `.env_dev` in development or `.env_prod` in production to be recognized by docker compose.
   4. Edit the environment variables as you please and ensure you do not share passwords and secure keys with the public. The env variables include:
      - ``SECRET_KEY`` - Django cryptography key leveraged in [reference](https://docs.djangoproject.com/en/4.0/ref/settings/#secret-key).
      - ``POSTGRES_DB`` - Postgres database name. [postgresql reference](https://www.postgresql.org/docs/14/libpq-envars.html), [docker reference](https://hub.docker.com/_/postgres)
