@@ -12,7 +12,7 @@
             <form id="contactForm" method="post">
                 {% csrf_token %}
                 {{ form|crispy }}
-                <input type="submit" name="contact-submit" class="btn btn-primary btn-lg" />
+                <button class="btn btn-success" type="submit">Send</button>
             </form>
     </div>
 {% endblock %}
