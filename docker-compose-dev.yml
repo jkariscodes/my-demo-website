@@ -3,7 +3,7 @@ version: '3.9'
 services:
 
   database:
-    image: postgres:14.3
+    image: postgres:14.5
     env_file:
       - .env_dev
     volumes:

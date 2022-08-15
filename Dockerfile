@@ -1,6 +1,6 @@
 # Base image
 
-FROM python:3.8.13-slim-buster
+FROM python:3.10.6-slim-buster
 
 ENV PYTHONDONTWRITEBYTECODE 1
 
