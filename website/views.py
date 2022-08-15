@@ -1,3 +1,4 @@
+from rest_framework import generics, permissions
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.mail import send_mail
@@ -9,6 +10,9 @@ from django.views.generic.edit import (
     DeleteView
 )
 from django.urls import reverse_lazy
+
+from .serializers import BlogPostSerializer
+from .permissions import IsOwnerOrReadOnly
 from .models import EmailMessage, BlogPost
 from .forms import ContactForm
 
@@ -136,3 +140,16 @@ class BlogSearchView(ListView):
         )
 
 
+class BlogPostListAPIView(generics.ListCreateAPIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    queryset = BlogPost.objects.all().filter(status='published')
+    serializer_class = BlogPostSerializer
+
+    def perform_create(self, serializer):  # new
+        serializer.save(author=self.request.user)
+
+
+class BlogPostDetailAPIView(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    queryset = BlogPost.objects.all().filter(status='published')
+    serializer_class = BlogPostSerializer

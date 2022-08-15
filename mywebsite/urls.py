@@ -14,6 +14,7 @@ urlpatterns = [
     path('', include('website.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),
+    path('my-api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
 if settings.ENVIRONMENT == 'development':
