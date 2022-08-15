@@ -1,5 +1,7 @@
 # My Website Project
 
+![image](https://user-images.githubusercontent.com/23359514/183810177-cfb570bf-2432-4625-a9d3-9a843735bc3d.png)
+
   ## Description
   This is a simple website that demonstrates web development using Django and Bootstrap and one that can be replicated
 in various contexts such as personal portfolio and company websites. There is an accompanying free video tutorial thread for the approach used in writing the code and testing its working. It can be accessed 
