@@ -16,7 +16,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DEBUG', default=0))
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.herokuapp.com', '.railway.app']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.herokuapp.com', 'my-demo-website-production.up.railway.app']
 
 
 # Application definition
