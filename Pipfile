@@ -17,8 +17,16 @@ dj-database-url = "==1.0.0"
 boto3 = "==1.26.12"
 django-storages = "==1.13.1"
 djangorestframework = "==3.14.0"
+django-environ = "~=0.9.0"
+markdown = "~=3.4.1"
 
 [dev-packages]
+black = "~=23.1.0"
+faker = "~=16.6.1"
+django-debug-toolbar = "~=3.8.1"
+coverage = "~=7.1.0"
+pytest = "~=7.2.1"
+pytest-django = "~=4.5.2"
 
 [requires]
 python_version = "3.10"
