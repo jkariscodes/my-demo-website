@@ -11,7 +11,9 @@ services:
     ports:
       - "5432:5432"
   web:
-    build: .
+    build:
+        context: .
+        dockerfile: Dockerfile-dev
     command: python /website/manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/website
