@@ -109,7 +109,6 @@ The minimum requirements required to deploy this project is [Docker Engine](). D
      ```
   8. To check the logs you can make use of ``docker compose -f docker-compose-dev.yml logs`` or ``docker compose -f docker-compose-dev.yml logs -f`` to continue watching the log file and its print out.
   9. In development, access the website in (HTTP) http://localhost:8000 while in production, (HTTPS) https://localhost
-  10. Please check the live website at **https://mywebsite-jkariukidev.herokuapp.com/**
 
   ## Usage
 
