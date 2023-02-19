@@ -31,11 +31,11 @@ help:
 
 shell:
 	@echo -e "$(CYAN)Starting Bash in the web production container:$(COFF)"
-	@docker-compose -f docker-compose-prod.yml run --rm web bash
+	@docker-compose -f docker-compose-prod.yml run --rm web python ./manage.py shell
 
 shell-dev:
 	@echo -e "$(CYAN)Starting Bash in the web development container:$(COFF)"
-	@docker-compose -f docker-compose-dev.yml run --rm web bash
+	@docker-compose -f docker-compose-dev.yml run --rm web python ./manage.py shell
 
 build:
 	@echo -e "$(CYAN)Creating Docker images for production:$(COFF)"
@@ -81,7 +81,7 @@ migrate-dev:
 
 load_initial_data:
 	@echo -e "$(CYAN)Loading django fixture:$(COFF)"
-	@docker-compose run --rm web python ./manage.py loaddata website/fixtures/initial.json
+	@docker-compose -f docker-compose-dev.yml run --rm web python ./manage.py loaddata website/fixtures/initial.json
 
 loadmanyprojects:
 	@echo -e "$(CYAN)Loading lots of projects:$(COFF)"
@@ -106,3 +106,12 @@ shutdown:
 shutdown-dev:
 	@echo -e "$(CYAN)Stopping services:$(COFF)"
 	@docker-compose -f docker-compose-dev.yml down
+
+
+logs:
+	@echo -e "$(CYAN)Checking logs:$(COFF)"
+	@docker-compose -f docker-compose-prod.yml logs -f
+
+logs-dev:
+	@echo -e "$(CYAN)Checking logs:$(COFF)"
+	@docker-compose -f docker-compose-dev.yml logs -f
