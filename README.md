@@ -62,7 +62,7 @@ The minimum requirements required to deploy this project is [Docker Engine](). D
 2. Create the environment variables file from the provided [development sample file](.env_dev.sample). You should now have the `.env_dev.yml` file.
 3. Edit the environment variables accordingly. They include environment, secret key, database connection settings etc.
 4. Build the required docker images by executing `make build-dev`
-5. Run the docker containers by executing `make up-dev`
+5. Run the docker containers by executing `make runserver-dev`
 6. Create super user (optional) by executing `make superuser-dev`
 
 #### Production
@@ -84,30 +84,22 @@ The minimum requirements required to deploy this project is [Docker Engine](). D
        production. [Reference](https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/#debug)
   5. Run the docker services for this project using compose in development environment.
      ```
-     docker compose -f docker-compose-dev.yml up
-     ```
-     OR to run in a detached mode (without seeing the logs) .ie. in the background
-     ```
-     docker compose -f docker-compose-dev.yml up -d
+     make runserver-dev
      ```
   6. Run the docker services for this project using compose in production environment.
      ```
-     docker compose -f docker-compose-prod.yml up
-     ```
-     OR to run in a detached mode (without seeing the logs) .ie. in the background
-     ```
-     docker compose -f docker-compose-prod.yml up -d
+     make runserver
      ```
   7. Propagate models into your database schema using the [migrate command](https://docs.djangoproject.com/en/4.0/ref/django-admin/#migrate). Note
      that this command is being run inside the docker web container. Refer for more on [exec docker command](https://docs.docker.com/engine/reference/commandline/compose_exec/).
      ```
-     docker compose -f docker-compose-dev.yml exec web python manage.py migrate
+     make migrate-dev
      ```
      similarly, in production
      ```
-     docker compose -f docker-compose-dev.yml exec web python manage.py migrate
+     make migrate
      ```
-  8. To check the logs you can make use of ``docker compose -f docker-compose-dev.yml logs`` or ``docker compose -f docker-compose-dev.yml logs -f`` to continue watching the log file and its print out.
+  8. To check the logs you can make use of ``make logs-dev`` or ``make logs`` to continue watching the log file and its print out.
   9. In development, access the website in (HTTP) http://localhost:8000 while in production, (HTTPS) https://localhost
 
   ## Usage
