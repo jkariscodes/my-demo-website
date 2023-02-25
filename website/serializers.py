@@ -4,8 +4,15 @@ from .models import BlogPost
 
 
 class BlogPostSerializer(serializers.ModelSerializer):
-    author = serializers.ReadOnlyField(source='author.username')
+    author = serializers.ReadOnlyField(source="author.username")
 
     class Meta:
         model = BlogPost
-        fields = ('title', 'id', 'body', 'category', 'status', 'author',)
+        fields = (
+            "title",
+            "id",
+            "body",
+            "category",
+            "status",
+            "author",
+        )
