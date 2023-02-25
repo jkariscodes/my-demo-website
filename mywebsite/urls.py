@@ -6,18 +6,22 @@ from django.urls import path, include
 
 from website.sitemaps import BlogPostSitemap
 
-sitemaps = {'blogposts': BlogPostSitemap}
+sitemaps = {"blogposts": BlogPostSitemap}
 
 urlpatterns = [
-    path('tajiri/', admin.site.urls),
-    path('accounts/', include('allauth.urls')),
-    path('', include('website.urls')),
-    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
-         name='django.contrib.sitemaps.views.sitemap'),
-    path('my-api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path("tajiri/", admin.site.urls),
+    path("accounts/", include("allauth.urls")),
+    path("", include("website.urls")),
+    path(
+        "sitemap.xml",
+        sitemap,
+        {"sitemaps": sitemaps},
+        name="django.contrib.sitemaps.views.sitemap",
+    ),
+    path("my-api-auth/", include("rest_framework.urls", namespace="rest_framework")),
 ]
 
-if settings.ENVIRONMENT == 'development':
+if settings.ENVIRONMENT == "development":
     urlpatterns = urlpatterns + static(
         settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
     )
