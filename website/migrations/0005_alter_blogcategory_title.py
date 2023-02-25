@@ -4,15 +4,16 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('website', '0004_remove_blogpost_header_image'),
+        ("website", "0004_remove_blogpost_header_image"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='blogcategory',
-            name='title',
-            field=models.CharField(default='Other', max_length=100, verbose_name='Title'),
+            model_name="blogcategory",
+            name="title",
+            field=models.CharField(
+                default="Other", max_length=100, verbose_name="Title"
+            ),
         ),
     ]

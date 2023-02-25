@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('website', '0002_blogcategory_blogpost'),
+        ("website", "0002_blogcategory_blogpost"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='blogpost',
-            name='header_image',
-            field=models.ImageField(null=True, upload_to='headers'),
+            model_name="blogpost",
+            name="header_image",
+            field=models.ImageField(null=True, upload_to="headers"),
         ),
     ]
