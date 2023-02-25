@@ -58,49 +58,42 @@ The back-end consists of a Docker container with Python and Django. This project
 ### Deployment
 The minimum requirements required to deploy this project is [Docker Engine](). Docker Engine contains docker, [docker compose]() and if on a Desktop environment and prefer a graphical user interface, once can make use of [Docker Desktop]().
 #### Local
-1. Clone the repository via commandline by executing `git clone `
-2. Create the environment variables file from the provided [development sample file](.env_dev.sample). You should now have the `.env_dev.yml` file.
+1. Clone the repository via commandline by executing `git clone https://github.com/jkariukidev/my-demo-website.git`
+2. Create the environment variables file from the provided [development sample file](.env_dev.sample). You should now have the `.env_dev` file.
 3. Edit the environment variables accordingly. They include environment, secret key, database connection settings etc.
 4. Build the required docker images by executing `make build-dev`
 5. Run the docker containers by executing `make runserver-dev`
-6. Create super user (optional) by executing `make superuser-dev`
+6. Apply migrations to synchronize the database state with the current set of models and migration using `make migrate-dev`
+7. Load initial data, creating test user account, blog category and blog posts making use of [django fixtures](https://docs.djangoproject.com/en/4.1/howto/initial-data/) and referred to in [initial.json](website/fixtures/initial.json) file.
+   `make load_initial_data`
+8. Create superuser (optional) by executing `make superuser-dev`
+9. Check logs using `make logs-dev`
 
 #### Production
-  To launch the project, follow the following steps.
   1. Install Git, Python with Pipenv (Pip can also be used), and Docker. Take note of [Windows pre-requisites](https://docs.docker.com/desktop/windows/install/#system-requirements) 
-     and [Linux pre-requisites](https://docs.docker.com/desktop/linux/install/#system-requirements) of installing Docker priorto proceeding.
-  2. Clone this project using `git clone` command.
+     and [Linux pre-requisites](https://docs.docker.com/desktop/linux/install/#system-requirements) of installing Docker prior to proceeding.
+  2. Clone this project using `git clone ` command.
       ```shell
      git clone https://github.com/jkariukidev/my-demo-website.git
      ```
-  3. Navigate into the cloned project folder and using a terminal/shell or otherwise, rename the [.env_dev.sample](.env_dev.sample) 
-     or [env_prod.sample](.env_prod.sample) to `.env_dev` in development or `.env_prod` in production to be recognized by docker compose.
-  4. Edit the environment variables as you please and ensure you do not share passwords and secure keys with the public. The env variables include:
+  3. Navigate into the cloned project folder and using a terminal/shell or otherwise, rename the [env_prod.sample](.env_prod.sample) to `.env_prod` in production to be recognized by docker compose.
+  4. Edit the environment variables as required and ensure you do not share passwords and secure keys with the public. The environment variables include:
      - ``SECRET_KEY`` - Django cryptography key leveraged in [reference](https://docs.djangoproject.com/en/4.0/ref/settings/#secret-key).
      - ``POSTGRES_DB`` - Postgres database name. [postgresql reference](https://www.postgresql.org/docs/14/libpq-envars.html), [docker reference](https://hub.docker.com/_/postgres)
      - ``POSTGRES_USER`` - Optional variable used together with ``POSTGRES_PASSWORD`` that sets a user and password.
      - ``POSTGRES_PASSWORD`` - Mandatory variable used to set a superuser password. Must not be empty.
-     - ``DEBUG`` - Variable used in fixing issues in development (hence set to ``False``)environment and should never be set to ``True`` in 
+     - ``DEBUG`` - Variable used in fixing issues in development (hence set to ``False``) environment and should never be set to ``True`` in 
        production. [Reference](https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/#debug)
-  5. Run the docker services for this project using compose in development environment.
-     ```
-     make runserver-dev
-     ```
-  6. Run the docker services for this project using compose in production environment.
+  5. Run the docker services for this project using compose in production environment.
      ```
      make runserver
      ```
-  7. Propagate models into your database schema using the [migrate command](https://docs.djangoproject.com/en/4.0/ref/django-admin/#migrate). Note
+  6. Propagate models into your database schema using the [migrate command](https://docs.djangoproject.com/en/4.0/ref/django-admin/#migrate). Note
      that this command is being run inside the docker web container. Refer for more on [exec docker command](https://docs.docker.com/engine/reference/commandline/compose_exec/).
-     ```
-     make migrate-dev
-     ```
-     similarly, in production
      ```
      make migrate
      ```
-  8. To check the logs you can make use of ``make logs-dev`` or ``make logs`` to continue watching the log file and its print out.
-  9. In development, access the website in (HTTP) http://localhost:8000 while in production, (HTTPS) https://localhost
+  7. To check the logs you can make use of ``make logs`` to continue watching the log file and its print out.
 
   ## Usage
 
@@ -108,6 +101,7 @@ The minimum requirements required to deploy this project is [Docker Engine](). D
   - Personal blog article management
   - User account management including authentication and authorization extensibility.
   - Emailing and web form security
+  - REST API
 
   ## License
   - [LICENSE](LICENSE)
