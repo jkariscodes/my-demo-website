@@ -66,7 +66,7 @@ build-dev:
 runserver:
 	@echo -e "$(GREEN)Starting Docker container with the app$(COFF)"
 	@docker-compose -f docker-compose-prod.yml up -d
-	@echo -e "$(CYAN)App ready and listening at http://127.0.0.1:8000.$(COFF)"
+	@echo -e "$(CYAN)App ready and listening at http://127.0.0.1.$(COFF)"
 
 runserver-dev:
 	@echo -e "$(GREEN)Starting Docker container with the app in development.$(COFF)"
