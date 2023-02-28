@@ -1,0 +1,19 @@
+body {
+    min-height: 100vh;
+}
+
+.blog-title {
+    text-align: center;
+}
+
+div.ghfork {
+    position: sticky;
+    top: 0;
+}
+
+div.ghfork img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0;
+}
