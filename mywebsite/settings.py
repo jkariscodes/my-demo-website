@@ -1,27 +1,30 @@
+import environ
 import os
 import dj_database_url
 from pathlib import Path
 
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-ENVIRONMENT = os.environ.get("ENVIRONMENT", default="production")
+# Take environment variables from .env file
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
+PROJECT_ENV = env("PROJECT_ENV")
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.environ.get("DEBUG", default=0))
+DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = [
-    "127.0.0.1",
-    "localhost",
-    "my-demo-website-production.up.railway.app",
-]
-
+ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(' ')
 
 # Application definition
 
@@ -59,6 +62,13 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+if PROJECT_ENV == "development":
+    INSTALLED_APPS.extend(["debug_toolbar", ])
+    MIDDLEWARE.extend(["debug_toolbar.middleware.DebugToolbarMiddleware", ])
+    import socket  # only if you haven't already imported this
+    hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+    INTERNAL_IPS = [ip[: ip.rfind(".")] + ".1" for ip in ips] + ["127.0.0.1", "10.0.2.2"]
+
 ROOT_URLCONF = "mywebsite.urls"
 
 TEMPLATES = [
@@ -89,13 +99,13 @@ WSGI_APPLICATION = "mywebsite.wsgi.application"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("POSTGRES_DB"),
-        "USER": os.environ.get("POSTGRES_USER"),
-        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
-        "HOST": os.environ.get("POSTGRES_HOST"),
-        "PORT": os.environ.get("POSTGRES_PORT"),
+    'default': {
+        'ENGINE': env('ENGINE'),
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
     }
 }
 
@@ -140,7 +150,7 @@ REST_FRAMEWORK = {
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-if ENVIRONMENT == "development":
+if PROJECT_ENV == "development":
     STATIC_URL = "static/"
     STATICFILES_DIRS = [BASE_DIR / "static"]
     STATIC_ROOT = BASE_DIR / "staticfiles"
@@ -160,8 +170,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "users.CustomUser"
 
 # Email
-DEFAULT_FROM_EMAIL = "contact@josephkariuki.com"
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = env("EMAIL_BACKEND")
 
 # Allauth configs
 LOGIN_REDIRECT = "/"
@@ -179,7 +188,7 @@ SITE_ID = 1
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-if ENVIRONMENT == "production":
+if PROJECT_ENV == "production":
     # Static file management using AWS (Feel free to use other)
     AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
     AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")

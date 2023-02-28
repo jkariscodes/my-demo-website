@@ -1,28 +1,39 @@
 version: '3.9'
 
 services:
+    database:
+        image: postgres:14.5-alpine
+        restart: always
+        environment:
+            - POSTGRES_PASSWORD=postgres
+            - DB_NAME=mydemowebsite
+            - DB_USER=demouser
+            - DB_PASSWORD=demoPassword123
+        healthcheck:
+            test: "pg_isready -q -d postgres -U postgres"
+            interval: 1s
+            timeout: 5s
+            retries: 10
+        volumes:
+          - ./initdb:/docker-entrypoint-initdb.d/
+          - postgres_data:/var/lib/postgresql/data/
+        ports:
+            - "5432:5432"
 
-  database:
-    image: postgres:14.5
-    env_file:
-      - .env_dev
-    volumes:
-      - postgres_data_dev:/var/lib/postgresql/data/
-    ports:
-      - "5432:5432"
-  web:
-    build:
-        context: .
-        dockerfile: Dockerfile-dev
-    command: python /website/manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/website
-    ports:
-      - "8000:8000"
-    env_file:
-      - .env_dev
-    depends_on:
-      - database
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile-dev
+        command: python /website/manage.py runserver 0.0.0.0:8000
+        volumes:
+            - .:/website
+        ports:
+            - "8000:8000"
+        env_file:
+            - .env
+        depends_on:
+            database:
+                condition: service_healthy
 
 volumes:
-  postgres_data_dev:
+  postgres_data:
