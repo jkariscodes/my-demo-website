@@ -199,18 +199,23 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 if PROJECT_ENV == "production":
-    # Static file management using AWS (Feel free to use other)
-    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-    AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
-    AWS_S3_CUSTOM_DOMAIN = os.environ.get("AWS_S3_CUSTOM_DOMAIN")
-    AWS_LOCATION = os.environ.get("AWS_S3_CUSTOM_DOMAIN")
-    STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-    DEFAULT_FILE_STORAGE = "mywebsite.storage_backends.MediaStorage"
-    STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/"
-    STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, "static"),
-    ]
+    USE_S3 = env("USE_S3")
+    if USE_S3:
+        # Static file management using AWS (Feel free to use other)
+        AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
+        AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
+        AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME")
+        AWS_DEFAULT_ACL = env("AWS_DEFAULT_ACL")
+        AWS_S3_CUSTOM_DOMAIN = env("AWS_S3_CUSTOM_DOMAIN")
+        AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+        AWS_LOCATION = env("AWS_S3_CUSTOM_DOMAIN")
+        STATICFILES_STORAGE = env("STATICFILES_STORAGE")
+        DEFAULT_FILE_STORAGE = env("DEFAULT_FILE_STORAGE")
+        STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/"
+        STATICFILES_DIRS = [
+            os.path.join(BASE_DIR, "static"),
+        ]
+
     # SSL Settings
     SECURE_HSTS_SECONDS = 3600
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
@@ -223,12 +228,12 @@ if PROJECT_ENV == "production":
     CSRF_COOKIE_SECURE = True
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
     # Email
-    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-    EMAIL_HOST = os.environ.get("EMAIL_HOST")
-    EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
-    EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
-    EMAIL_PORT = os.environ.get("EMAIL_PORT")
-    EMAIL_USE_TLS = True
+    EMAIL_BACKEND = env("EMAIL_BACKEND")
+    EMAIL_HOST = env("EMAIL_HOST")
+    EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+    EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+    EMAIL_PORT = env("EMAIL_PORT")
+    EMAIL_USE_TLS = env("EMAIL_USE_TLS")
 
 # Database URL
 db_env = dj_database_url.config(conn_max_age=600)
