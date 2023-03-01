@@ -9,7 +9,7 @@ GRAY ?= \033[0;37m
 WHITE ?= \033[1;37m
 COFF ?= \033[0m
 
-.PHONY: all help shell shell-dev build build-dev runserver runserver-dev collectststic collectststic-dev makemigrations makemigrations-dev migrate migrate-dev load-initial-data load-many-posts superuser superuser-dev shutdown shutdown-dev shutdown-volumes shutdown-volumes-dev logs logs-dev logs-interactive logs-interactive-dev coverage-django lint lint-fix test-project test-website test-users docker
+.PHONY: all help shell shell-dev build build-dev runserver runserver-dev collectststic collectstatic-dev makemigrations makemigrations-dev migrate migrate-dev load-initial-data load-many-posts superuser superuser-dev shutdown shutdown-dev shutdown-volumes shutdown-volumes-dev logs logs-dev logs-interactive logs-interactive-dev coverage-django lint lint-fix test-project test-website test-users docker
 
 all: help
 
