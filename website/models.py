@@ -27,7 +27,9 @@ class BlogCategory(models.Model):
 
     created = models.DateTimeField(auto_now_add=True, verbose_name="Created at")
     updated = models.DateTimeField(auto_now=True, verbose_name="Created at")
-    title = models.CharField(max_length=100, verbose_name="Title", default="Other", unique=True)
+    title = models.CharField(
+        max_length=100, verbose_name="Title", default="Other", unique=True
+    )
 
     class Meta:
         verbose_name = "Category"
