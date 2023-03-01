@@ -1,27 +1,28 @@
+import environ
 import os
 import dj_database_url
 from pathlib import Path
 
+env = environ.Env(DEBUG=(bool, False))
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-ENVIRONMENT = os.environ.get("ENVIRONMENT", default="production")
+# Take environment variables from .env file
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
+PROJECT_ENV = env("PROJECT_ENV")
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.environ.get("DEBUG", default=0))
+DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = [
-    "127.0.0.1",
-    "localhost",
-    "my-demo-website-production.up.railway.app",
-]
-
+ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(" ")
 
 # Application definition
 
@@ -59,6 +60,25 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+if PROJECT_ENV == "development":
+    INSTALLED_APPS.extend(
+        [
+            "debug_toolbar",
+        ]
+    )
+    MIDDLEWARE.extend(
+        [
+            "debug_toolbar.middleware.DebugToolbarMiddleware",
+        ]
+    )
+    import socket  # only if you haven't already imported this
+
+    hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+    INTERNAL_IPS = [ip[: ip.rfind(".")] + ".1" for ip in ips] + [
+        "127.0.0.1",
+        "10.0.2.2",
+    ]
+
 ROOT_URLCONF = "mywebsite.urls"
 
 TEMPLATES = [
@@ -90,12 +110,12 @@ WSGI_APPLICATION = "mywebsite.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("POSTGRES_DB"),
-        "USER": os.environ.get("POSTGRES_USER"),
-        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
-        "HOST": os.environ.get("POSTGRES_HOST"),
-        "PORT": os.environ.get("POSTGRES_PORT"),
+        "ENGINE": env("ENGINE"),
+        "NAME": env("DB_NAME"),
+        "USER": env("DB_USER"),
+        "PASSWORD": env("DB_PASSWORD"),
+        "HOST": env("DB_HOST"),
+        "PORT": env("DB_PORT"),
     }
 }
 
@@ -140,7 +160,7 @@ REST_FRAMEWORK = {
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-if ENVIRONMENT == "development":
+if PROJECT_ENV == "development":
     STATIC_URL = "static/"
     STATICFILES_DIRS = [BASE_DIR / "static"]
     STATIC_ROOT = BASE_DIR / "staticfiles"
@@ -160,8 +180,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "users.CustomUser"
 
 # Email
-DEFAULT_FROM_EMAIL = "contact@josephkariuki.com"
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = env("EMAIL_BACKEND")
 
 # Allauth configs
 LOGIN_REDIRECT = "/"
@@ -179,19 +198,24 @@ SITE_ID = 1
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-if ENVIRONMENT == "production":
-    # Static file management using AWS (Feel free to use other)
-    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-    AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
-    AWS_S3_CUSTOM_DOMAIN = os.environ.get("AWS_S3_CUSTOM_DOMAIN")
-    AWS_LOCATION = os.environ.get("AWS_S3_CUSTOM_DOMAIN")
-    STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-    DEFAULT_FILE_STORAGE = "mywebsite.storage_backends.MediaStorage"
-    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
-    STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, "static"),
-    ]
+if PROJECT_ENV == "production":
+    USE_S3 = env("USE_S3")
+    if USE_S3:
+        # Static file management using AWS (Feel free to use other)
+        AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
+        AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
+        AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME")
+        AWS_DEFAULT_ACL = env("AWS_DEFAULT_ACL")
+        AWS_S3_CUSTOM_DOMAIN = env("AWS_S3_CUSTOM_DOMAIN")
+        AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+        AWS_LOCATION = env("AWS_S3_CUSTOM_DOMAIN")
+        STATICFILES_STORAGE = env("STATICFILES_STORAGE")
+        DEFAULT_FILE_STORAGE = env("DEFAULT_FILE_STORAGE")
+        STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/"
+        STATICFILES_DIRS = [
+            os.path.join(BASE_DIR, "static"),
+        ]
+
     # SSL Settings
     SECURE_HSTS_SECONDS = 3600
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
@@ -204,12 +228,12 @@ if ENVIRONMENT == "production":
     CSRF_COOKIE_SECURE = True
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
     # Email
-    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-    EMAIL_HOST = os.environ.get("EMAIL_HOST")
-    EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
-    EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
-    EMAIL_PORT = os.environ.get("EMAIL_PORT")
-    EMAIL_USE_TLS = True
+    EMAIL_BACKEND = env("EMAIL_BACKEND")
+    EMAIL_HOST = env("EMAIL_HOST")
+    EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+    EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+    EMAIL_PORT = env("EMAIL_PORT")
+    EMAIL_USE_TLS = env("EMAIL_USE_TLS")
 
 # Database URL
 db_env = dj_database_url.config(conn_max_age=600)
