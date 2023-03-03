@@ -176,7 +176,7 @@ Following the guidelines on testing Python projects using:
 
 ## Deployment
 Use the [production configuration](docker-compose-prod.yml) in deploying into a public server. Following the guidelines on deployment in tutorial demo:
-- [Video Tutorial Demo](https://youtube.com/josephkariukidev)
+- [Video Tutorial Demo](https://www.youtube.com/playlist?list=PLIET7uEHqcqif6wye0sL-XZ9o95zgYmaa)
 
 ## Questions
 If you have any questions you can contact me!
