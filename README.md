@@ -158,15 +158,20 @@ your extra branch(es).
 And last but not least: Always write your commit messages in the present tense. Your commit message should describe what 
 the commit, when applied, does to the code – not what you did to the code.
 
-  ## Tests
-  Following the guidelines on testing Python projects using:
-  - Implementation of Django Unittest in this project. Run the tests using:
-    * ``make test-project`` - To run all automatic django tests for the entire project.
-    * ``test-website`` - To run all automatic django tests for the website app only.
-    * ``test-users`` - To run all automatic django tests for the users app only.
-  - Other testing tools that cab be incorporated here include:
-    * [Tox](https://docs.djangoproject.com/en/4.0/internals/contributing/writing-code/unit-tests/#running-tests-using-tox)
-    * [Django testing tools](https://docs.djangoproject.com/en/4.0/topics/testing/tools/)
+## Tests
+Following the guidelines on testing Python projects using:
+ - Implementation of Django Unittest in this project. Run the tests using:
+   * ``make test-project`` - To run all automatic django tests for the entire project.
+   * ``test-website`` - To run all automatic django tests for the website app only.
+   * ``test-users`` - To run all automatic django tests for the users app only.
+ - Other testing tools that cab be incorporated here include:
+   * [Tox](https://docs.djangoproject.com/en/4.0/internals/contributing/writing-code/unit-tests/#running-tests-using-tox)
+   * [Django testing tools](https://docs.djangoproject.com/en/4.0/topics/testing/tools/)
+ 
+ Some of the packages that help in testing include:
+   * ``Django-Debug-Toolbar`` which by default appears on the test/development deployment as shown.
+   ![image](https://user-images.githubusercontent.com/23359514/222653944-16ca0957-582d-42db-8d20-f4d7de68fedd.png)
+
 
 
 ## Deployment
