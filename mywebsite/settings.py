@@ -112,6 +112,9 @@ DATABASES = {
     "default": {
         "ENGINE": env("ENGINE"),
         "NAME": env("DB_NAME"),
+        "TEST": {
+            "NAME": "mytestdatabase",
+        },
         "USER": env("DB_USER"),
         "PASSWORD": env("DB_PASSWORD"),
         "HOST": env("DB_HOST"),
@@ -207,7 +210,7 @@ if PROJECT_ENV == "production":
         AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME")
         AWS_DEFAULT_ACL = env("AWS_DEFAULT_ACL")
         AWS_S3_CUSTOM_DOMAIN = env("AWS_S3_CUSTOM_DOMAIN")
-        AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+        AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
         AWS_LOCATION = env("AWS_S3_CUSTOM_DOMAIN")
         STATICFILES_STORAGE = env("STATICFILES_STORAGE")
         DEFAULT_FILE_STORAGE = env("DEFAULT_FILE_STORAGE")
