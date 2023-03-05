@@ -162,8 +162,8 @@ the commit, when applied, does to the code – not what you did to the code.
 Following the guidelines on testing Python projects using:
  - Implementation of Django Unittest in this project. Run the tests using:
    * ``make test-project`` - To run all automatic django tests for the entire project.
-   * ``test-website`` - To run all automatic django tests for the website app only.
-   * ``test-users`` - To run all automatic django tests for the users app only.
+   * ``make test-website`` - To run all automatic django tests for the website app only.
+   * ``make test-users`` - To run all automatic django tests for the users app only.
  - Other testing tools that cab be incorporated here include:
    * [Tox](https://docs.djangoproject.com/en/4.0/internals/contributing/writing-code/unit-tests/#running-tests-using-tox)
    * [Django testing tools](https://docs.djangoproject.com/en/4.0/topics/testing/tools/)
