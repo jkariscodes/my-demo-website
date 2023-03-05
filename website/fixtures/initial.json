@@ -38,10 +38,52 @@
     "fields": {
       "title": "Kenya",
       "author": 1,
-      "body": "<p>Kenya is located on Africa&#39;s East Coast, across from the equator. To the north, it shares borders with Somalia, Ethiopia, and Sudan. To the west, Tanzania, Uganda, and east, the Indian Ocean. The country is roughly the size of Texas State, United States, with 225 000 square miles (582 646 square kilometers).</p><h2>Geography and Climate</h2><p>The central highlands rise from the Indian Ocean shore. The highlands are divided by the Great Rift Valley. East of the city is a rich plateau. One of Africa&#39;s most fruitful agricultural regions is the highlands. At 17,057 feet, Mount Kenya is the second-highest mountain in Africa.</p><p>On the coast, Kenya has a tropical climate, although the interior of the country is dry. It rains a lot between March and May. Although there is little rain in October and November, temperatures are still high.</p><p>Kenya experiences a lot of sunshine all year long. Both at night and in the morning, it is cool. The prolonged rainy season lasts from April through June. October through December make up the brief. Below is a map of Kenya.</p><h2>Map of Kenya</h2><p><img alt=\"\" src=\"https://www.worldatlas.com/r/w960-q80/upload/ab/e1/d6/counties-of-kenya-map.png\" style=\"border-style:solid; border-width:1px; height:886px; margin:1px; width:750px\" /></p><p>&nbsp;</p>",
+      "body": "<p>Kenya is located on Africa&#39;s East Coast, across from the equator. To the north, it shares borders with Somalia, Ethiopia, and Sudan. To the west, Tanzania, Uganda, and east, the Indian Ocean. The country is roughly the size of Texas State, United States, with 225 000 square miles (582 646 square kilometers).</p><h2>Geography and Climate</h2><p>The central highlands rise from the Indian Ocean shore. The highlands are divided by the Great Rift Valley. East of the city is a rich plateau. One of Africa&#39;s most fruitful agricultural regions is the highlands. At 17,057 feet, Mount Kenya is the second-highest mountain in Africa.</p><p>On the coast, Kenya has a tropical climate, although the interior of the country is dry. It rains a lot between March and May. Although there is little rain in October and November, temperatures are still high.</p><p>Kenya experiences a lot of sunshine all year long. Both at night and in the morning, it is cool. The prolonged rainy season lasts from April through June. October through December make up the brief. Below is a map of Kenya.</p><h2>Map of Kenya</h2><p><img alt=\"\" src=\"https://www.worldatlas.com/r/w960-q80/upload/ab/e1/d6/counties-of-kenya-map.png\" style=\"border-style:solid; border-width:1px; height:498px; margin:1px; width:425px\" /></p><p>&nbsp;</p>",
       "published": "2023-02-19 15:46:20.580626+00:00",
       "created": "2023-02-19 15:46:20.585131+00:00",
       "updated": "2023-02-19 15:46:20.585148+00:00",
+      "category": 1,
+      "status": "published"
+    }
+  },
+    {
+    "model": "website.blogpost",
+    "pk": "3ac6cd36-e038-4877-a587-7eff7659f1b2",
+    "fields": {
+      "title": "Kafka",
+      "author": 1,
+      "body": "<p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.</p><p>The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. &quot;What&#39;s happened to me? &quot; he thought. It wasn&#39;t a dream.</p><p>His room, a proper human room although a little too small, lay peacefully between its four familiar walls.</p><p>A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer.</p><p>Gregor then turned to look out the window at the dull weather. Drops of rain could be heard hitting the pane, which made him feel quite sad.</p><p>&quot;How about if I sleep a little bit longer and forget all this nonsense&quot;, he thought, but that was something he was unable to do because he was used to sleeping on his right, and in his present state couldn&#39;t get into that position. However hard he threw himself onto his right, he always rolled back to where he was.</p><p>He must have tried it a hundred times, shut his eyes so that he wouldn&#39;t have to look at the floundering legs, and only stopped when he began to feel a mild, dull pain there that he had never felt before. &quot;Oh, God&quot;, he thought, &quot;what a strenuous career it is that I&#39;ve chosen! Travelling day in and day out. Doing business like this takes much more effort than doing your own business at home, and on top of that there&#39;s the curse of travelling, worries about making train connections, bad and irregular food, contact with different people all the time so that you can never get to know anyone or become friendly with them. It can all go to Hell! &quot; He felt a slight itch</p>",
+      "published": "2023-02-19 15:48:20.580626+00:00",
+      "created": "2023-02-19 15:48:20.585131+00:00",
+      "updated": "2023-02-19 15:48:20.585148+00:00",
+      "category": 1,
+      "status": "published"
+    }
+  },
+  {
+    "model": "website.blogpost",
+    "pk": "34f1b9fd-5c0c-4f76-8767-941f1d83f622",
+    "fields": {
+      "title": "Pangram",
+      "author": 1,
+      "body": "<p>The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph, for quick jigs vex! Fox nymphs grab quick-jived waltz. Brick quiz whangs jumpy veldt fox. Bright vixens jump; dozy fowl quack.</p><p>Quick wafting zephyrs vex bold Jim. Quick zephyrs blow, vexing daft Jim. Sex-charged fop blew my junk TV quiz. How quickly daft jumping zebras vex. Two driven jocks help fax my big quiz. Quick, Baz, get my woven flax jodhpurs! &quot;Now fax quiz Jack! &quot; my brave ghost pled.</p><p>Five quacking zephyrs jolt my wax bed. Flummoxed by job, kvetching W. zaps Iraq. Cozy sphinx waves quart jug of bad milk. A very bad quack might jinx zippy fowls. Few quips galvanized the mock jury box. Quick brown dogs jump over the lazy fox. The jay, pig, fox, zebra, and my wolves quack!</p><p>Blowzy red vixens fight for a quick jump. Joaquin Phoenix was gazed by MTV for luck. A wizard&rsquo;s job is to vex chumps quickly in fog. Watch &quot;Jeopardy! &quot;, Alex Trebek&#39;s fun TV quiz game. Woven silk pyjamas exchanged for blue quartz. Brawny gods just flocked up to quiz and vex him.</p><p>Adjusting quiver and bow, Zompyc[1] killed the fox. My faxed joke won a pager in the cable TV quiz show. Amazingly few discotheques provide jukeboxes. My girl wove six dozen plaid jackets before she quit. Six big devils from Japan quickly forgot how to waltz. Big July earthquakes confound zany experimental vow.</p><p>Foxy parsons quiz and cajole the lovably dim wiki-girl. Have a pick: twenty six letters - no forcing a jumbled quiz! Crazy Fredericka bought many very exquisite opal jewels. Sixty zippers were quickly picked from the woven jute bag. A quick movement of the enemy will jeopardize six gunboats.</p><p>All questions asked by five watch experts amazed the judge. Jack quietly moved up front and seized the big ball of wax. The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph, for quick jigs vex! Fox nymphs grab quick-jived waltz. Brick quiz whangs jumpy veldt fox. Bright vixens jump; dozy fowl quack. Quick wafting zephyrs vex bold Jim. Quick zephyrs blow, vexing daft Jim. Sex-charged fop blew my</p>",
+      "published": "2023-02-19 15:49:20.580626+00:00",
+      "created": "2023-02-19 15:49:20.585131+00:00",
+      "updated": "2023-02-19 15:49:20.585148+00:00",
+      "category": 1,
+      "status": "published"
+    }
+  },
+  {
+    "model": "website.blogpost",
+    "pk": "69dbd9a1-b8f8-4b72-8ab8-8a409691b1f4",
+    "fields": {
+      "title": "Cicero",
+      "author": 1,
+      "body": "<p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.</p><p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful.</p><p>Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure.</p><p>To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it?</p><p>But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure? On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee</p>",
+      "published": "2023-02-19 15:50:20.580626+00:00",
+      "created": "2023-02-19 15:50:20.585131+00:00",
+      "updated": "2023-02-19 15:50:20.585148+00:00",
       "category": 1,
       "status": "published"
     }
