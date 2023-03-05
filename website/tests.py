@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.test import SimpleTestCase, TestCase
 from django.urls import reverse, resolve
 
@@ -27,14 +27,13 @@ class HomePageTests(SimpleTestCase):
 class UserCreationTests(TestCase):
     user_name = "jkariukidev22"
     email = "jkariukidev22@email.com"
-    password = "jkariuki123"
 
     def setUp(self):
         url = reverse("account_signup")
         self.response = self.client.get(url)
 
     def test_signup_form(self):
-        user_one = User.objects.create_user(self.user_name, self.email, self.password)
-        self.assertEqual(User.objects.all().count(), 1)
-        self.assertEqual(User.objects.all()[0].username, self.user_name)
-        self.assertEqual(User.objects.all()[0].email, self.email)
+        user_one = get_user_model().objects.create_user(self.user_name, self.email)
+        self.assertEqual(get_user_model().objects.all().count(), 1)
+        self.assertEqual(get_user_model().objects.all()[0].username, self.user_name)
+        self.assertEqual(get_user_model().objects.all()[0].email, self.email)
