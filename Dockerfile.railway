@@ -25,4 +25,4 @@ COPY . /app/app
 EXPOSE 8000
 
 # Populate database and start server
-CMD python3 manage.py migrate --no-input; python3 manage.py loaddata website/fixtures/initial.json; python3 manage.py runserver 0.0.0.0:8000; gunicorn mywebsite.wsgi
+CMD python3 manage.py migrate --no-input; python3 manage.py loaddata website/fixtures/initial.json; gunicorn mywebsite.wsgi
