@@ -1,20 +1,28 @@
 # Base image
-
 FROM python:3.10.10-slim-buster
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-EXPOSE 8000
+# Install pipenv
+RUN pip install pipenv
 
-# Working directory
-WORKDIR /website
+# Don't run as root therefore create non-root user
+RUN groupadd --gid 1001 app
+RUN useradd --uid 1001 --gid app --home /app app
+RUN mkdir /app && \
+    chown app.app /app
+USER app
+WORKDIR /app/app
 
 # Installing dependencies
-COPY Pipfile Pipfile.lock /website/
-RUN pip install pipenv && pipenv install --system
+COPY Pipfile Pipfile.lock /app/
+RUN pipenv install --system
 
 # Copy project files and directories
-COPY . /website/
+COPY . /app/app
 
-ENTRYPOINT ["python3"]
-CMD ["manage.py", "runserver", "0.0.0.0:8000"]
+# Port where the Django app runs
+EXPOSE 8000
+
+# Populate database and start server
+CMD python3 manage.py migrate --no-input; python3 manage.py website/fixtures/initial.json; python manage.py runserver 0.0.0.0:8000
