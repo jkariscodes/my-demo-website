@@ -3,26 +3,39 @@ FROM python:3.10.10-slim-buster
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Install pipenv
+# create directory for the app user
+RUN mkdir -p /home/app
+
+# don't run as root therefore create non-root user
+RUN groupadd --gid 1001 app && \
+    useradd --uid 1001 --gid app --home /home/app app
+
+# install pipenv
 RUN pip install pipenv
 
-# Don't run as root therefore create non-root user
-RUN groupadd --gid 1001 app
-RUN useradd --uid 1001 --gid app --home /app app
-RUN mkdir /app && \
-    chown app.app /app
-USER app
-WORKDIR /app/app
+# create the appropriate directories
+ENV HOME=/home/app
+ENV APP_HOME=/home/app/web
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
 
-# Installing dependencies
-COPY Pipfile Pipfile.lock /app/
+# installing dependencies
+COPY Pipfile Pipfile.lock $APP_HOME
+
+# install dependencies
 RUN pipenv install --system
 
-# Copy project files and directories
-COPY . /app/app
+# copy project files and directories
+COPY . $APP_HOME
+
+# chown all the files to the app user
+RUN chown -R app:app $APP_HOME
+
+# change to the app user
+USER app
 
 # Port where the Django app runs
 EXPOSE 8000
 
 # Populate database and start server
-CMD python3 manage.py migrate --no-input; python3 manage.py loaddata website/fixtures/initial.json; gunicorn -b :$PORT mywebsite.wsgi
+CMD python3 manage.py migrate; python3 manage.py loaddata website/fixtures/initial.json; gunicorn mywebsite.wsgi --bind 0.0.0.0:8000
