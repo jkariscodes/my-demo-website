@@ -213,7 +213,7 @@ if PROJECT_ENV == "production":
         AWS_LOCATION = env("AWS_S3_CUSTOM_DOMAIN")
         STATICFILES_STORAGE = env("STATICFILES_STORAGE")
         DEFAULT_FILE_STORAGE = env("DEFAULT_FILE_STORAGE")
-        STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/"
+        STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
         STATICFILES_DIRS = [
             os.path.join(BASE_DIR, "static"),
         ]
