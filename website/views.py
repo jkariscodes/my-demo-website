@@ -115,7 +115,7 @@ class ContactPageView(FormView):
         from_email = form.cleaned_data.get("from_email")
         subj = form.cleaned_data.get("subject")
         msg = form.cleaned_data.get("message")
-        send_mail(subj, msg, from_email, settings.EMAIL_RECIPIENT)
+        send_mail(subj, msg, from_email, [settings.DEFAULT_FROM_EMAIL])
         form.save()
         form = ContactForm
         return super().form_valid(form)

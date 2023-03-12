@@ -236,7 +236,6 @@ if PROJECT_ENV == "production":
     EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
     EMAIL_PORT = env("EMAIL_PORT")
     EMAIL_USE_TLS = env("EMAIL_USE_TLS")
-EMAIL_RECIPIENT = [env("EMAIL_RECIPIENT")]
 
 # Database URL
 db_env = dj_database_url.config(conn_max_age=600)
