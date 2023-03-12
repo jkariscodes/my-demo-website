@@ -1,5 +1,3 @@
-{% extends '_base.html' %}
-
 {% load i18n %}
 {% load account %}
 
@@ -10,7 +8,7 @@
             {% trans "Note" %}:
         </strong>
         {% blocktrans %}
-            you are already logged in as {{ user_display }}.
+            You are already logged in as <em>{{ user_display }}</em>.
         {% endblocktrans %}
     </p>
 </div>
