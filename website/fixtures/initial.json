@@ -10,6 +10,18 @@
     }
   },
   {
+    "model": "users.customuser",
+    "pk": 2,
+    "fields": {
+      "username": "webadmin",
+      "password": "pbkdf2_sha256$390000$LuJlL1rWtZ24TF3C0Yjh0n$j5bk75ZFxXAqHHfAwRFiDh8kVNG3jGLwbHCjGC0DMSI=",
+      "email": "webadmin@example.com",
+      "is_active": "True",
+      "is_staff": "True",
+      "is_superuser": "True"
+    }
+  },
+  {
     "model": "website.blogcategory",
     "pk": 1,
     "fields": {
