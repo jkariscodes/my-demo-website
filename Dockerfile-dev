@@ -1,15 +1,35 @@
 # Base image
-
 FROM python:3.10.10-slim-buster
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Working directory
-WORKDIR /website
+# create directory for the app user
+RUN mkdir -p /home/app
 
-# Installing dependencies and development packages
-COPY Pipfile Pipfile.lock /website/
-RUN pip install pipenv && pipenv install --dev --system
+# don't run as root therefore create non-root user
+RUN groupadd --gid 1001 app && \
+    useradd --uid 1001 --gid app --home /home/app app
 
-# Copy project files and directories
-COPY . /website/
+# install pipenv
+RUN pip install pipenv
+
+# create the appropriate directories
+ENV HOME=/home/app
+ENV APP_HOME=/home/app/website
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
+
+# installing dependencies
+COPY Pipfile Pipfile.lock $APP_HOME
+
+# install dependencies
+RUN pipenv install --dev --system
+
+# copy project files and directories
+COPY . $APP_HOME
+
+# chown all the files to the app user
+RUN chown -R app:app $APP_HOME
+
+# change to the app user
+USER app
