@@ -81,9 +81,13 @@ The minimum requirements required to deploy this project is [Docker Engine](). D
 5. Run the docker containers by executing `make runserver-dev`
 6. Apply migrations to synchronize the database state with the current set of models and migration using `make migrate-dev`
 7. Load initial data, creating test user account, blog category and blog posts making use of [django fixtures](https://docs.djangoproject.com/en/4.1/howto/initial-data/) and referred to in [initial.json](website/fixtures/initial.json) file.
-   `make load_initial_data` creates sample blog posts and a test user. To see this change, please refresh your browser in the articles page. 
+   `make load-initial-data` creates sample blog posts, a superuser, and a test user. To see this change, please refresh your browser in the articles page. 
 8. Create superuser (optional) by executing `make superuser-dev`
-9. Check logs using `make logs-dev` or to view the logs interactely use `make logs-interactive-dev`
+9. To log into admin panel, use the details below:
+    * URL: http://localhost:8000/tajiri (local environment)
+    * Username: `admin`
+    * Password: `IAmTheAdmin123`
+10. Check logs using `make logs-dev` or to view the logs interactely use `make logs-interactive-dev`
 
 #### Production
   1. Clone this project using `git clone ` command.
@@ -114,6 +118,7 @@ The minimum requirements required to deploy this project is [Docker Engine](). D
   6. Check logs using `make logs` or to view the logs interactively use `make logs-interactive`
 
 For several other commands, view them in the [Makefile](Makefile)
+
 
   ## Usage
 
