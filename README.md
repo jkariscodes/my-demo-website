@@ -85,7 +85,7 @@ The minimum requirements required to deploy this project is [Docker Engine](). D
 8. Create superuser (optional) by executing `make superuser-dev`
 9. To log into admin panel, use the details below:
     * URL: http://localhost:8000/tajiri (local environment)
-    * Username: `admin`
+    * Username: `webadmin`
     * Password: `IAmTheAdmin123`
 10. Check logs using `make logs-dev` or to view the logs interactely use `make logs-interactive-dev`
 
