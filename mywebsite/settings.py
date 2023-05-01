@@ -202,6 +202,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 if PROJECT_ENV == "production":
+
     USE_S3 = env("USE_S3")
     if USE_S3:
         # Static file management using AWS (Feel free to use other)
@@ -217,6 +218,29 @@ if PROJECT_ENV == "production":
         STATICFILES_DIRS = [
             os.path.join(BASE_DIR, "static"),
         ]
+
+    USE_CLOUDINARY = env("USE_CLOUDINARY")
+    if USE_CLOUDINARY:
+        INSTALLED_APPS.remove("whitenoise.runserver_nostatic")
+        INSTALLED_APPS.remove("storages")
+        INSTALLED_APPS.insert(5, "cloudinary_storage")
+        INSTALLED_APPS.insert(7, "cloudinary")
+        MIDDLEWARE.remove("whitenoise.middleware.WhiteNoiseMiddleware")
+        CLOUDINARY_STORAGE = {
+            "CLOUD_NAME": env("CLOUDINARY_CLOUD_NAME"),
+            "API_KEY": env("CLOUDINARY_API_KEY"),
+            "API_SECRET": env("CLOUDINARY_API_SECRET"),
+            'SECURE': True,
+            'STATIC_IMAGES_EXTENSIONS': ['jpg', 'jpe', 'jpeg', 'jpc', 'jp2', 'j2k', 'wdp', 'jxr',
+                                         'hdp', 'png', 'gif', 'webp', 'bmp', 'tif', 'tiff', 'ico'],
+        }
+        CLOUDINARY_URL = env("CLOUDINARY_URL")
+        STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+        DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+        STATIC_URL = "static/"
+        MEDIA_URL = "/media/"
+        STATIC_ROOT = BASE_DIR / "staticfiles"
+        MEDIA_ROOT = BASE_DIR / "mediafiles"
 
     # SSL Settings
     SECURE_HSTS_SECONDS = 3600
