@@ -34,8 +34,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.sites",
     "django.contrib.sitemaps",
-    "whitenoise.runserver_nostatic",
+    # "whitenoise.runserver_nostatic",
+    "cloudinary_storage",
     "django.contrib.staticfiles",
+    "cloudinary",
     # Third party
     "crispy_forms",
     "crispy_bootstrap5",
@@ -43,7 +45,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "rest_framework",
     "ckeditor",
-    "storages",
+    # "storages",
     # Local
     "website.apps.WebsiteConfig",
     "users.apps.UsersConfig",
@@ -52,7 +54,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
+    # "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -221,11 +223,6 @@ if PROJECT_ENV == "production":
 
     USE_CLOUDINARY = env("USE_CLOUDINARY")
     if USE_CLOUDINARY:
-        INSTALLED_APPS.remove("whitenoise.runserver_nostatic")
-        INSTALLED_APPS.remove("storages")
-        INSTALLED_APPS.insert(7, "cloudinary_storage")
-        INSTALLED_APPS.insert(9, "cloudinary")
-        MIDDLEWARE.remove("whitenoise.middleware.WhiteNoiseMiddleware")
         CLOUDINARY_STORAGE = {
             "CLOUD_NAME": env("CLOUDINARY_CLOUD_NAME"),
             "API_KEY": env("CLOUDINARY_API_KEY"),
