@@ -37,7 +37,8 @@ The back-end consists of a Docker container with Python and Django. This project
 * [__Django__](https://docs.djangoproject.com/) as the base framework
 * [__django-environ__](https://django-environ.readthedocs.org/) for management of environment variables
 * [__markdown__](http://pythonhosted.org/Markdown/siteindex.html) for rendering markdown in HTML
-* [__psycopg2-binary__](https://www.psycopg.org/docs/) database adapter to facilitate database connectivity and other operations.
+* [__psycopg__](https://www.psycopg.org/docs/) database adapter to facilitate database connectivity and other operations.
+* [__psycopg-binary__](https://www.psycopg.org/docs/) database adapter to facilitate database connectivity and other operations.
 * [__crispy-bootstrap5__](https://github.com/django-crispy-forms/crispy-bootstrap5) Bootstrap5 template pack for django-crispy-forms.
 * [__django-allauth__](https://django-allauth.readthedocs.io/en/latest/) reusable Django app that allows for both local and social authentication
 * [__django-ckeditor__](https://github.com/django-ckeditor/django-ckeditor) providing editor support in the project.
