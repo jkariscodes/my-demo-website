@@ -2,17 +2,17 @@ version: '3.9'
 
 services:
     database:
-        image: postgres:13.10-alpine
+        image: postgres:14.8-alpine
         restart: always
         environment:
-            - POSTGRES_PASSWORD=postgres
-            - DB_NAME=mydemowebsite
-            - DB_USER=demouser
-            - DB_PASSWORD=demoPassword123
+            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+            - DB_NAME=${DB_NAME}
+            - DB_USER=${DB_USER}
+            - DB_PASSWORD=${DB_PASSWORD}
         healthcheck:
-            test: "pg_isready -q -d postgres -U postgres"
-            interval: 1s
-            timeout: 5s
+            test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "$POSTGRES_USER" ]
+            interval: 30s
+            timeout: 10s
             retries: 10
         volumes:
           - ./initdb:/docker-entrypoint-initdb.d/
@@ -31,6 +31,8 @@ services:
             - "8000:8000"
         env_file:
             - .env
+        environment:
+            - DATABASE_URL=postgres://${DB_USER}:${DB_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${DB_NAME}
         depends_on:
             database:
                 condition: service_healthy
