@@ -40,7 +40,7 @@ if USE_WHITENOISE:
     INSTALLED_APPS.insert(7, "whitenoise.runserver_nostatic")
     MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
     STATIC_URL = "/static/"
-    STATIC_ROOT = BASE_DIR / "staticfiles"
+    STATIC_ROOT = BASE_DIR / "static"
     STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
     # User uploaded content
     MEDIA_URL = "/media/"
