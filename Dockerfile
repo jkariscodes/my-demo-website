@@ -1,5 +1,5 @@
 # Base image
-FROM python:3.10.10-slim-buster
+FROM python:3.10.12-slim-buster
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
@@ -17,6 +17,8 @@ RUN pip install pipenv
 ENV HOME=/home/app
 ENV APP_HOME=/home/app/website
 RUN mkdir $APP_HOME
+RUN mkdir $APP_HOME/staticfiles
+RUN mkdir $APP_HOME/mediafiles
 WORKDIR $APP_HOME
 
 # installing dependencies
