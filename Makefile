@@ -9,7 +9,7 @@ GRAY ?= \033[0;37m
 WHITE ?= \033[1;37m
 COFF ?= \033[0m
 
-.PHONY: all help shell shell-dev build build-dev runserver runserver-dev collectststic collectstatic-dev makemigrations makemigrations-dev migrate migrate-dev load-initial-data load-many-posts superuser superuser-dev shutdown shutdown-dev shutdown-volumes shutdown-volumes-dev logs logs-dev logs-interactive logs-interactive-dev coverage-django lint lint-fix test-project test-website test-users docker
+.PHONY: all help shell shell-dev build build-dev runserver runserver-dev collectstatic collectstatic-dev makemigrations makemigrations-dev migrate migrate-dev load-initial-data load-many-posts superuser superuser-dev shutdown shutdown-dev shutdown-volumes shutdown-volumes-dev logs logs-dev logs-interactive logs-interactive-dev coverage-django lint lint-fix test-project test-website test-users docker
 
 all: help
 
@@ -83,7 +83,7 @@ makemigrations-dev:
 
 collectstatic:
 	@echo -e "$(CYAN)Running django collectstatic:$(COFF)"
-	@docker-compose -f docker-compose.yml run --rm web python ./manage.py collectstatic --no-input $(cmd)
+	@docker-compose -f docker-compose-prod.yml run --rm web python ./manage.py collectstatic --no-input $(cmd)
 
 collectstatic-dev:
 	@echo -e "$(CYAN)Running django collectstatic in develoment:$(COFF)"
@@ -115,7 +115,7 @@ superuser-dev:
 
 shutdown:
 	@echo -e "$(CYAN)Stopping services:$(COFF)"
-	@docker-compose -f docker-compose.yml down
+	@docker-compose -f docker-compose-prod.yml down
 
 shutdown-dev:
 	@echo -e "$(CYAN)Stopping services:$(COFF)"
@@ -123,7 +123,7 @@ shutdown-dev:
 
 shutdown-volumes:
 	@echo -e "$(CYAN)Stopping services and deleting volumes:$(COFF)"
-	@docker-compose -f docker-compose.yml down --volumes
+	@docker-compose -f docker-compose-prod.yml down --volumes
 
 shutdown-volumes-dev:
 	@echo -e "$(CYAN)Stopping services and deleting volumes:$(COFF)"

@@ -3,6 +3,7 @@ version: '3.9'
 services:
     database:
         image: postgres:14.8-alpine
+        container_name: db4${COMPOSE_PROJECT_NAME}
         restart: always
         environment:
             - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -16,7 +17,7 @@ services:
             retries: 10
         volumes:
           - ./initdb:/docker-entrypoint-initdb.d/
-          - postgres_data:/var/lib/postgresql/data/
+          - postgres_data_dev:/var/lib/postgresql/data/
         ports:
             - "5432:5432"
 
@@ -24,18 +25,23 @@ services:
         build:
             context: .
             dockerfile: Dockerfile-dev
+        container_name: web4${COMPOSE_PROJECT_NAME}
         command: python /home/app/website/manage.py runserver 0.0.0.0:8000
         volumes:
-            - .:/home/app/website
+            - static_volume:/home/app/website/staticfiles
+            - media_volume:/home/app/website/mediafiles
         ports:
             - "8000:8000"
         env_file:
             - .env
         environment:
             - DATABASE_URL=postgres://${DB_USER}:${DB_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${DB_NAME}
+            - DJANGO_SETTINGS_MODULE=mywebsite.settings.local
         depends_on:
             database:
                 condition: service_healthy
 
 volumes:
-  postgres_data:
+  postgres_data_dev:
+  static_volume:
+  media_volume:
