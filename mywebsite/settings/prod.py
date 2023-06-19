@@ -41,12 +41,12 @@ if USE_WHITENOISE:
     MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
     STATIC_URL = "/static/"
     STATIC_ROOT = BASE_DIR / "static"
-    # STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
     # User uploaded content
     MEDIA_URL = "/media/"
     MEDIA_ROOT = BASE_DIR / "mediafiles"
 
-elif USE_S3:
+if USE_S3:
     # Static file management using AWS (Feel free to use other)
     AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
     AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
@@ -61,7 +61,7 @@ elif USE_S3:
         os.path.join(BASE_DIR, "static"),
     ]
 
-elif USE_CLOUDINARY:
+if USE_CLOUDINARY:
     # Static file management using WhiteNoise in production
     INSTALLED_APPS.insert(7, "cloudinary_storage")
     INSTALLED_APPS.insert(9, "cloudinary")
