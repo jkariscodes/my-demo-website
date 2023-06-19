@@ -41,7 +41,7 @@ if USE_WHITENOISE:
     MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
     STATIC_URL = "/static/"
     STATIC_ROOT = BASE_DIR / "static"
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+    # STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
     # User uploaded content
     MEDIA_URL = "/media/"
     MEDIA_ROOT = BASE_DIR / "mediafiles"
