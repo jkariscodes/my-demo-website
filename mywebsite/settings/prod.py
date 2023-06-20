@@ -22,6 +22,9 @@ DEBUG = False
 
 ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(" ")
 
+# Content Security Policy using django-csp
+MIDDLEWARE.insert(1, "csp.middleware.CSPMiddleware")
+
 DATABASES = {
     "default": {
         "ENGINE": env("ENGINE"),
@@ -38,7 +41,7 @@ USE_WHITENOISE, USE_S3, USE_CLOUDINARY = env("USE_WHITENOISE"), env("USE_S3"), e
 if USE_WHITENOISE:
     # Static file management using WhiteNoise in production
     INSTALLED_APPS.insert(7, "whitenoise.runserver_nostatic")
-    MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
+    MIDDLEWARE.insert(2, "whitenoise.middleware.WhiteNoiseMiddleware")
     STATIC_URL = "/static/"
     STATIC_ROOT = BASE_DIR / "static"
     STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
@@ -102,3 +105,8 @@ EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = env("EMAIL_PORT")
 EMAIL_USE_TLS = env("EMAIL_USE_TLS")
+
+# Content Security Policy settings (django-csp)
+CSP_IMG_SRC = ("'self'", "https:",)
+CSP_STYLE_SRC = ("'self'", "'unsafe-inline'",)
+CSP_SCRIPT_SRC = ("'self'", "https:",)
