@@ -3,9 +3,6 @@ import environ
 
 env = environ.Env(DEBUG=(bool, False))
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
 # Take environment variables from .env file
 environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
@@ -21,6 +18,9 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = False
 
 ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(" ")
+
+# Content Security Policy using django-csp
+MIDDLEWARE.insert(1, "csp.middleware.CSPMiddleware")
 
 DATABASES = {
     "default": {
@@ -38,15 +38,15 @@ USE_WHITENOISE, USE_S3, USE_CLOUDINARY = env("USE_WHITENOISE"), env("USE_S3"), e
 if USE_WHITENOISE:
     # Static file management using WhiteNoise in production
     INSTALLED_APPS.insert(7, "whitenoise.runserver_nostatic")
-    MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
-    STATIC_URL = "static/"
-    STATIC_ROOT = BASE_DIR / "staticfiles"
+    MIDDLEWARE.insert(2, "whitenoise.middleware.WhiteNoiseMiddleware")
+    STATIC_URL = "/static/"
+    STATIC_ROOT = BASE_DIR / "static"
     STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
     # User uploaded content
     MEDIA_URL = "/media/"
     MEDIA_ROOT = BASE_DIR / "mediafiles"
 
-elif USE_S3:
+if USE_S3:
     # Static file management using AWS (Feel free to use other)
     AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
     AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
@@ -61,7 +61,7 @@ elif USE_S3:
         os.path.join(BASE_DIR, "static"),
     ]
 
-elif USE_CLOUDINARY:
+if USE_CLOUDINARY:
     # Static file management using WhiteNoise in production
     INSTALLED_APPS.insert(7, "cloudinary_storage")
     INSTALLED_APPS.insert(9, "cloudinary")
@@ -102,3 +102,8 @@ EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = env("EMAIL_PORT")
 EMAIL_USE_TLS = env("EMAIL_USE_TLS")
+
+# Content Security Policy settings (django-csp)
+CSP_IMG_SRC = ("'self'", "https:",)
+CSP_STYLE_SRC = ("'self'", "'unsafe-inline'", "https:",)
+CSP_SCRIPT_SRC = ("'self'", "https:",)
