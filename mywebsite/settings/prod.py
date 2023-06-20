@@ -105,5 +105,5 @@ EMAIL_USE_TLS = env("EMAIL_USE_TLS")
 
 # Content Security Policy settings (django-csp)
 CSP_IMG_SRC = ("'self'", "https:",)
-CSP_STYLE_SRC = ("'self'", "'unsafe-inline'",)
+CSP_STYLE_SRC = ("'self'", "'unsafe-inline'", "https:",)
 CSP_SCRIPT_SRC = ("'self'", "https:",)
