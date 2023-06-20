@@ -55,6 +55,7 @@ The back-end consists of a Docker container with Python and Django. This project
 * [__Faker__](https://faker.readthedocs.io) for generating fake data for use/test in this project (TODO)
 * [__coverage__](https://coverage.readthedocs.io/) for measuring code coverage
 * [__pytest-django__](https://pytest-django.readthedocs.io/) for testing django specific functionalities during development (TODO)
+* [__django-csp__](https://django-csp.readthedocs.io/) for implementing Content Security Policy in this project.
 
 ### Deployment
 The minimum requirements required to deploy this project is [Docker Engine](). Docker Engine contains docker, [docker compose]() and if on a Desktop environment and prefer a graphical user interface, once can make use of [Docker Desktop]().
