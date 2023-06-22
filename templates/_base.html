@@ -45,6 +45,9 @@
                                 <li>
                                     <a class="dropdown-item" href="{% url 'blog_posts' %}">Articles</a>
                                 </li>
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'blog_list_api' %}">API</a>
+                                </li>
                                 {% if user.is_authenticated %}
                                 <li><a class="dropdown-item" href="{% url 'blog_article_create' %}">Create New
                                         Article</a></li>
