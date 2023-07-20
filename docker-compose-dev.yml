@@ -12,7 +12,7 @@ services:
             - DB_PASSWORD=${DB_PASSWORD}
         healthcheck:
             test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "$POSTGRES_USER" ]
-            interval: 30s
+            interval: 40s
             timeout: 10s
             retries: 10
         volumes:
@@ -40,6 +40,7 @@ services:
         depends_on:
             database:
                 condition: service_healthy
+        restart: always
 
 volumes:
   postgres_data_dev:
